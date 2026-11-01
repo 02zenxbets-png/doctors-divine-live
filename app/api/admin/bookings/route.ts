@@ -34,7 +34,7 @@ function todayISO(): string {
  */
 export async function GET(req: NextRequest) {
   if (!isAdminRequest()) {
-    return NextResponse.json({ error: "Locked. Admin password daalein." }, { status: 401 });
+    return NextResponse.json({ error: "Locked. Please enter the admin password." }, { status: 401 });
   }
   if (!isSupabaseConfigured()) {
     return NextResponse.json(
@@ -68,7 +68,7 @@ export async function GET(req: NextRequest) {
   }
   const { data: bookings, error } = await listQuery;
   if (error) {
-    return NextResponse.json({ error: "Bookings load nahi ho payi." }, { status: 500 });
+    return NextResponse.json({ error: "Bookings could not be loaded." }, { status: 500 });
   }
 
   // Counts (independent of the list filter, except scope "today" is separate).

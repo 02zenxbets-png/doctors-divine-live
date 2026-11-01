@@ -74,7 +74,7 @@ export default function DashboardPage() {
       }
       const json = await res.json();
       if (!res.ok) {
-        setLoadError(json.error || "Bookings load nahi ho payi.");
+        setLoadError(json.error || "Bookings could not be loaded.");
         return;
       }
       const list: Booking[] = json.bookings ?? [];
@@ -94,7 +94,7 @@ export default function DashboardPage() {
       setBookings(list);
       setLastUpdated(new Date());
     } catch {
-      setLoadError("Network problem. Refresh now dabayein.");
+      setLoadError("Network problem. Please press Refresh now.");
     }
   }, [scope, statusFilter, search]);
 
@@ -131,7 +131,7 @@ export default function DashboardPage() {
       });
       const json = await res.json();
       if (!res.ok) {
-        setUnlockError(json.error || "Unlock nahi ho paya.");
+        setUnlockError(json.error || "Could not unlock.");
         return;
       }
       setPassword("");
@@ -139,7 +139,7 @@ export default function DashboardPage() {
       knownIds.current = new Set();
       setPhase("open");
     } catch {
-      setUnlockError("Network problem. Dobara try karein.");
+      setUnlockError("Network problem. Please try again.");
     } finally {
       setUnlocking(false);
     }
@@ -152,7 +152,7 @@ export default function DashboardPage() {
   }
 
   async function act(id: string, action: "status" | "delete" | "retry", value?: string) {
-    if (action === "delete" && !confirm("Ye booking delete kar dein?")) return;
+    if (action === "delete" && !confirm("Delete this booking?")) return;
     const url =
       action === "retry"
         ? "/api/admin/retry-email"
@@ -193,7 +193,7 @@ export default function DashboardPage() {
       body: JSON.stringify(emails),
     });
     if (res.status === 401) return setPhase("locked");
-    setSettingsMsg(res.ok ? "Emails save ho gaye." : "Save nahi ho paye.");
+    setSettingsMsg(res.ok ? "Emails saved." : "Could not save.");
   }
 
   if (phase === "loading") {
@@ -203,11 +203,12 @@ export default function DashboardPage() {
   if (phase === "not-configured") {
     return (
       <div className="mx-auto max-w-xl px-4 py-16">
-        <h1 className="text-2xl font-extrabold">Dashboard locked — password set nahi hai</h1>
+        <h1 className="text-2xl font-extrabold">Dashboard locked — password not set</h1>
         <p className="mt-3 text-sm text-brand-muted">
-          Dashboard ka admin password abhi set nahi hua hai. README me diye
-          steps se <code className="bg-gray-100 px-1">ADMIN_PASSWORD_HASH</code>{" "}
-          banayein aur Vercel me env var set karein, phir ye page kholein.
+          The dashboard admin password has not been set yet. Follow the steps
+          in the README to create an{" "}
+          <code className="bg-gray-100 px-1">ADMIN_PASSWORD_HASH</code>{" "}
+          and set it as an env var in Vercel, then open this page again.
         </p>
       </div>
     );
@@ -219,7 +220,7 @@ export default function DashboardPage() {
         <LockIcon className="h-9 w-9 text-brand-muted" />
         <h1 className="mt-3 text-2xl font-extrabold">Dashboard — Doctor only</h1>
         <p className="mt-2 text-sm text-brand-muted">
-          Bookings sirf doctor dekh sakta hai. Admin password daalein.
+          Only the doctor can view bookings. Enter the admin password.
         </p>
         <form onSubmit={unlock} className="mt-6 space-y-3 rounded-2xl border border-brand-line p-5">
           <input
@@ -243,9 +244,9 @@ export default function DashboardPage() {
           </button>
         </form>
         <p className="mt-4 rounded-xl bg-amber-50 p-4 text-xs text-amber-800">
-          <AlertIcon className="mr-1 inline h-4 w-4 align-middle" /> Password ka koi recovery/reset nahi hai — bhool gaye to bookings is
-          dashboard se nahi khulengi. Password safe jagah likh kar rakho; reset
-          ke liye Vercel me ADMIN_PASSWORD_HASH badalna hoga (README dekhein).
+          <AlertIcon className="mr-1 inline h-4 w-4 align-middle" /> There is no password recovery/reset — if you forget it, bookings
+          will not open from this dashboard. Write the password down somewhere
+          safe; to reset it, change ADMIN_PASSWORD_HASH in Vercel (see README).
         </p>
       </div>
     );
@@ -334,7 +335,7 @@ export default function DashboardPage() {
         <input
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
-          placeholder="Search naam / mobile / token…"
+          placeholder="Search name / mobile / token…"
           className="min-w-[220px] flex-1 rounded-lg border border-brand-line px-3 py-2 text-sm"
         />
       </div>
@@ -347,7 +348,7 @@ export default function DashboardPage() {
       <div className="mt-4 space-y-3">
         {bookings.length === 0 && !loadError && (
           <p className="rounded-2xl border border-dashed border-brand-line p-8 text-center text-sm text-brand-muted">
-            Koi booking nahi mili. Pehli asli booking Book Appointment page se aayegi.
+            No bookings found. The first real booking will arrive from the Book Appointment page.
           </p>
         )}
         {bookings.map((b) => (
@@ -399,10 +400,10 @@ export default function DashboardPage() {
       <section className="mt-8 rounded-2xl border border-brand-line p-5">
         <h2 className="font-extrabold">Booking email alerts</h2>
         <p className="mt-1 text-sm text-brand-muted">
-          Har nayi booking ki details in 3 email addresses par bheji jayegi.{" "}
+          Details of every new booking will be sent to these 3 email addresses.{" "}
           {emailConfigured
-            ? "Email service (Resend) connected hai."
-            : "Email service abhi OFF hai — RESEND_API_KEY set nahi hai, isliye koi email nahi bheja jayega (README dekhein)."}
+            ? "Email service (Resend) is connected."
+            : "Email service is currently OFF — RESEND_API_KEY is not set, so no emails will be sent (see README)."}
         </p>
         <form onSubmit={saveSettings} className="mt-4 grid gap-2 sm:grid-cols-3">
           <input
@@ -437,10 +438,11 @@ export default function DashboardPage() {
       <section className="mt-8 rounded-2xl border border-brand-line p-5">
         <h2 className="font-extrabold">Admin password — Doctor only</h2>
         <p className="mt-1 text-sm text-brand-muted">
-          Dashboard ka password Vercel ke env vars me <code className="bg-gray-100 px-1">ADMIN_PASSWORD_HASH</code> se
-          set hota hai, is page se nahi. Password badalna ho to naya hash banakar
-          Vercel me env var update karein aur redeploy karein (README: “Admin
-          password badalna ya bhool jana”).
+          The dashboard password is set via the{" "}
+          <code className="bg-gray-100 px-1">ADMIN_PASSWORD_HASH</code> env var
+          in Vercel, not from this page. To change the password, create a new
+          hash, update the env var in Vercel and redeploy (README: “Changing or
+          forgetting the admin password”).
         </p>
       </section>
     </div>

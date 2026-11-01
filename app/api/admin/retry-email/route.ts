@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
     .eq("id", String(body.id ?? ""))
     .maybeSingle();
   if (error || !booking) {
-    return NextResponse.json({ error: "Booking nahi mili." }, { status: 404 });
+    return NextResponse.json({ error: "Booking not found." }, { status: 404 });
   }
   const recipients = await getEmailRecipients(supabase);
   if (!process.env.RESEND_API_KEY || recipients.length === 0) {

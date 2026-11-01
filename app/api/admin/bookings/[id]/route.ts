@@ -28,7 +28,7 @@ export async function PATCH(
     .update({ status })
     .eq("id", params.id);
   if (error) {
-    return NextResponse.json({ error: "Status update nahi ho paya." }, { status: 500 });
+    return NextResponse.json({ error: "Status could not be updated." }, { status: 500 });
   }
   return NextResponse.json({ ok: true });
 }
@@ -44,7 +44,7 @@ export async function DELETE(
   const supabase = getServiceClient();
   const { error } = await supabase.from("bookings").delete().eq("id", params.id);
   if (error) {
-    return NextResponse.json({ error: "Booking delete nahi ho payi." }, { status: 500 });
+    return NextResponse.json({ error: "Booking could not be deleted." }, { status: 500 });
   }
   return NextResponse.json({ ok: true });
 }

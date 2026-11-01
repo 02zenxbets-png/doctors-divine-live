@@ -24,12 +24,12 @@ function NavLink({ href, children }: { href: string; children: React.ReactNode }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="hi">
+    <html lang="en">
       <body>
         <header className="sticky top-0 z-40 border-b border-brand-line bg-white/95 backdrop-blur">
           <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3">
             <Link href="/" className="flex items-center gap-3">
-              <LogoMark className="h-10 w-10 shrink-0" />
+              <LogoMark className="h-12 w-12 shrink-0" />
               <span className="leading-tight">
                 <span className="block text-base font-extrabold text-brand-ink">
                   Doctors Divine
@@ -58,10 +58,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <footer className="border-t border-brand-line bg-gray-50">
           <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:grid-cols-3">
             <div>
-              <p className="flex items-center gap-2 text-base font-extrabold"><LogoMark className="h-8 w-8 shrink-0" /> Doctors Divine</p>
+              <p className="flex items-center gap-2 text-base font-extrabold"><LogoMark className="h-10 w-10 shrink-0" /> Doctors Divine</p>
               <p className="mt-1 text-sm text-brand-muted">
                 Multispeciality Hospital — your health is our responsibility.
-                Serving Navin Nagar, Nawada — aur aas-paas ke har gaon ko —
+                Serving Navin Nagar, Nawada — and every village around —
                 since 2020.
               </p>
             </div>

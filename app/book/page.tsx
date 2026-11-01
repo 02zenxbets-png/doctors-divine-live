@@ -39,10 +39,10 @@ export default function BookPage() {
     e.preventDefault();
     setError("");
     const cleanMobile = mobile.replace(/\D/g, "").slice(-10);
-    if (!name.trim()) return setError("Patient ka naam zaroori hai.");
-    if (!mobileOk) return setError("Sahi 10-digit mobile number daalein.");
-    if (!date) return setError("Date chunein.");
-    if (!slot) return setError("Time slot chunein.");
+    if (!name.trim()) return setError("Patient name is required.");
+    if (!mobileOk) return setError("Please enter a valid 10-digit mobile number.");
+    if (!date) return setError("Please choose a date.");
+    if (!slot) return setError("Please choose a time slot.");
     setSaving(true);
     try {
       const res = await fetch("/api/bookings", {
@@ -61,7 +61,7 @@ export default function BookPage() {
       });
       const json = await res.json();
       if (!res.ok) {
-        setError(json.error || "Booking save nahi ho payi. Dobara try karein.");
+        setError(json.error || "Booking could not be saved. Please try again.");
         return;
       }
       setDone({
@@ -73,7 +73,7 @@ export default function BookPage() {
         emailStatus: json.booking?.emailStatus ?? "off",
       });
     } catch {
-      setError("Network problem. Dobara try karein ya hospital ko call karein.");
+      setError("Network problem. Please try again or call the hospital.");
     } finally {
       setSaving(false);
     }
@@ -81,14 +81,14 @@ export default function BookPage() {
 
   if (done) {
     const waText = encodeURIComponent(
-      `Namaste, meri booking confirm hui hai — Token ${done.token}, ${done.patientName}, ${done.doctor}, ${done.date}, ${done.timeSlot}.`
+      `Hello, my booking is confirmed — Token ${done.token}, ${done.patientName}, ${done.doctor}, ${done.date}, ${done.timeSlot}.`
     );
     return (
       <div className="mx-auto max-w-xl px-4 py-16 text-center">
         <CheckIcon className="mx-auto h-12 w-12 text-green-600" />
-        <h1 className="mt-4 text-2xl font-extrabold">Booking ho gayi!</h1>
+        <h1 className="mt-4 text-2xl font-extrabold">Booking confirmed!</h1>
         <p className="mt-2 text-sm text-brand-muted">
-          Hospital aate waqt ye token number reception par dikhayein.
+          Show this token number at the reception when you visit the hospital.
         </p>
         <div className="mx-auto mt-6 max-w-sm rounded-2xl border border-brand-line bg-brand-bg p-6">
           <p className="text-xs font-bold uppercase tracking-widest text-brand-muted">Your Token Number</p>
@@ -107,10 +107,10 @@ export default function BookPage() {
             rel="noreferrer"
             className="btn-secondary inline-flex items-center gap-1.5"
           >
-            <ChatIcon className="h-4 w-4" /> WhatsApp par confirm karein
+            <ChatIcon className="h-4 w-4" /> Confirm on WhatsApp
           </a>
           <a href={`tel:${HOSPITAL.phoneHref}`} className="btn-secondary inline-flex items-center gap-1.5">
-            <PhoneIcon className="h-4 w-4" /> Hospital ko call karein
+            <PhoneIcon className="h-4 w-4" /> Call the hospital
           </a>
         </div>
         <button
@@ -125,11 +125,11 @@ export default function BookPage() {
           }}
           className="mt-6 text-sm font-bold text-brand-red hover:underline"
         >
-          Ek aur booking
+          Book another appointment
         </button>
         <p className="mt-6 text-xs text-brand-muted">
-          Emergency hai to booking ka wait na karein — seedha hospital aayein ya{" "}
-          {HOSPITAL.phoneDisplay} par call karein. Hospital 24×7 khula hai.
+          In an emergency, do not wait for a booking — come straight to the hospital or
+          call {HOSPITAL.phoneDisplay}. The hospital is open 24×7.
         </p>
       </div>
     );
@@ -155,13 +155,13 @@ export default function BookPage() {
     <div className="mx-auto max-w-2xl px-4 py-10">
       <h1 className="text-2xl font-extrabold">Book Appointment</h1>
       <p className="mt-1 text-sm text-brand-muted">
-        Doctor aur time slot khud chunein — booking turant confirm, token number
-        ke saath. Bina call, bina line.
+        Choose the doctor and time slot yourself — booking confirmed instantly,
+        with a token number. No calls, no queues.
       </p>
 
       <form onSubmit={submit} className="mt-6 space-y-6 rounded-2xl border border-brand-line p-5 sm:p-6">
         <div>
-          <p className="text-sm font-bold">Step 1 — Doctor chunein</p>
+          <p className="text-sm font-bold">Step 1 — Choose a doctor</p>
           <div className="mt-2 grid gap-2 sm:grid-cols-3">
             {[...DOCTORS.map((d) => d.name), "Other"].map((d) => (
               <button
@@ -173,14 +173,14 @@ export default function BookPage() {
                   doctor === d ? "bg-brand-darkred text-white" : "bg-gray-100 text-brand-ink"
                 }`}
               >
-                {d === "Other" ? "Koi aur / pata nahi" : d}
+                {d === "Other" ? "Other / Not sure" : d}
               </button>
             ))}
           </div>
         </div>
 
         <div>
-          <p className="text-sm font-bold">Step 2 — Date aur time slot</p>
+          <p className="text-sm font-bold">Step 2 — Date and time slot</p>
           <input
             type="date"
             value={date}
@@ -196,11 +196,11 @@ export default function BookPage() {
         </div>
 
         <div className="space-y-3">
-          <p className="text-sm font-bold">Step 3 — Patient ki details</p>
+          <p className="text-sm font-bold">Step 3 — Patient details</p>
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="Patient ka naam *"
+            placeholder="Patient name *"
             className="w-full rounded-lg border border-brand-line px-3 py-2 text-sm"
             required
           />
@@ -223,14 +223,14 @@ export default function BookPage() {
             <input
               value={area}
               onChange={(e) => setArea(e.target.value)}
-              placeholder="Gaon / Area"
+              placeholder="Village / Area"
               className="rounded-lg border border-brand-line px-3 py-2 text-sm"
             />
           </div>
           <input
             value={problem}
             onChange={(e) => setProblem(e.target.value)}
-            placeholder="Takleef (problem)"
+            placeholder="Problem / symptoms"
             className="w-full rounded-lg border border-brand-line px-3 py-2 text-sm"
           />
         </div>
@@ -244,17 +244,17 @@ export default function BookPage() {
           disabled={saving}
           className="w-full btn-primary inline-flex items-center justify-center gap-1.5"
         >
-          {saving ? "Booking save ho rahi hai…" : (<><CheckIcon className="h-4 w-4" /> Confirm Booking</>)}
+          {saving ? "Saving booking…" : (<><CheckIcon className="h-4 w-4" /> Confirm Booking</>)}
         </button>
       </form>
 
       <p className="mt-4 text-center text-sm text-brand-muted">
-        Help chahiye? Call karein{" "}
+        Need help? Call{" "}
         <a href={`tel:${HOSPITAL.phoneHref}`} className="font-bold text-brand-red">{HOSPITAL.phoneDisplay}</a>{" "}
-        ya WhatsApp par message karein.
+        or message us on WhatsApp.
       </p>
       <p className="mt-2 text-center text-sm">
-        <Link href="/" className="font-bold text-brand-red hover:underline">← Hospital website par wapas</Link>
+        <Link href="/" className="font-bold text-brand-red hover:underline">← Back to the hospital website</Link>
       </p>
     </div>
   );

@@ -54,22 +54,22 @@ export async function POST(req: NextRequest) {
   const area = String(body.area ?? "").trim() || null;
 
   if (!patientName) {
-    return NextResponse.json({ error: "Patient ka naam zaroori hai." }, { status: 400 });
+    return NextResponse.json({ error: "Patient name is required." }, { status: 400 });
   }
   if (!/^[6-9]\d{9}$/.test(mobile)) {
     return NextResponse.json(
-      { error: "Sahi 10-digit mobile number daalein." },
+      { error: "Please enter a valid 10-digit mobile number." },
       { status: 400 }
     );
   }
   if (!DOCTORS.includes(doctor)) {
-    return NextResponse.json({ error: "Doctor chunein." }, { status: 400 });
+    return NextResponse.json({ error: "Please choose a doctor." }, { status: 400 });
   }
   if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
-    return NextResponse.json({ error: "Date chunein." }, { status: 400 });
+    return NextResponse.json({ error: "Please choose a date." }, { status: 400 });
   }
   if (!ALL_SLOTS.includes(timeSlot)) {
-    return NextResponse.json({ error: "Time slot chunein." }, { status: 400 });
+    return NextResponse.json({ error: "Please choose a time slot." }, { status: 400 });
   }
 
   const supabase = getServiceClient();
@@ -95,7 +95,7 @@ export async function POST(req: NextRequest) {
 
   if (error || !booking) {
     return NextResponse.json(
-      { error: "Booking save nahi ho payi. Dobara try karein ya hospital ko call karein." },
+      { error: "Booking could not be saved. Please try again or call the hospital." },
       { status: 500 }
     );
   }

@@ -17,7 +17,7 @@ export const HOSPITAL = {
   phoneAltHref: "+917411590340",
   phoneHref: "+918797303540",
   whatsappHref:
-    "https://wa.me/918797303540?text=Namaste%2C%20mujhe%20hospital%20aana%20hai",
+    "https://wa.me/918797303540?text=Hello%2C%20I%20want%20to%20visit%20the%20hospital",
   email: "drranvijay@gmail.com",
   website: "doctorsdivine.com",
   since: 2020,
@@ -37,7 +37,7 @@ export const DOCTORS: {
     name: "Dr. Ranvijay Bharti",
     title: "General & Laparoscopic Surgeon · Proctologist",
     tagline: "Founder & MD, Doctors Divine · 10+ years experience · 1,000+ surgeries",
-    bio: "Nawada ke jaane-maane surgeon. Laser piles/fissure/fistula aur laparoscopic surgery me visheshagya — planned aur emergency dono surgery hospital ke apne OT me karte hain.",
+    bio: "A well-known surgeon in Nawada. Specialist in laser piles, fissure and fistula treatment and laparoscopic surgery — planned and emergency surgeries are performed in the hospital's own operation theatre.",
     specialties: [
       "Laser Piles",
       "Fissure / Fistula",
@@ -52,7 +52,7 @@ export const DOCTORS: {
     name: "Dr. Ritu Verma",
     title: "Gynaecologist & Obstetrician",
     tagline: "Women's Health & Maternity Specialist",
-    bio: "Pregnancy care, delivery aur mahilaon ki health ke liye bharosemand naam. Pehli jaanch se lekar surakshit delivery tak — har kadam par saath.",
+    bio: "A trusted name for pregnancy care, delivery and women's health. From the first check-up to a safe delivery — with you at every step.",
     specialties: [
       "Pregnancy Care",
       "Normal Delivery",
@@ -86,49 +86,49 @@ export const SERVICES: { icon: string; title: string; desc: string }[] = [
   {
     icon: "target",
     title: "Laser Proctology",
-    desc: "Piles, fissure aur fistula ka laser treatment — kam dard, jaldi recovery, aksar same-day discharge.",
+    desc: "Laser treatment for piles, fissure and fistula — less pain, faster recovery, often same-day discharge.",
   },
   {
     icon: "scissors",
     title: "General & Laparoscopic Surgery",
-    desc: "Hernia, appendix, gall bladder aur planned/emergency surgery — apne hi operation theatre me.",
+    desc: "Hernia, appendix, gall bladder and planned or emergency surgery — in our own operation theatre.",
   },
   {
     icon: "heart",
     title: "Maternity & Women's Health",
-    desc: "Pregnancy care, normal delivery, C-section aur mahilaon ki har health problem ka ilaaj.",
+    desc: "Pregnancy care, normal delivery, C-section and treatment for every women's health problem.",
   },
   {
     icon: "alert",
     title: "24×7 Emergency & ICU",
-    desc: "Din ho ya raat — emergency care, ICU beds aur OT har samay ready. Centralised oxygen facility.",
+    desc: "Day or night — emergency care, ICU beds and OT ready at all times. Centralised oxygen facility.",
   },
   {
     icon: "flask",
     title: "Pathology Lab",
-    desc: "Hospital ki apni lab — blood tests, hormone tests, ECG aur health packages. 24-hour sample collection.",
+    desc: "The hospital's own lab — blood tests, hormone tests, ECG and health packages. 24-hour sample collection.",
   },
   {
     icon: "capsule",
     title: "In-house Pharmacy",
-    desc: "Hospital ke andar hi dawai ki dukaan — ilaaj ke baad bahar bhatakna nahi padta.",
+    desc: "A medicine shop inside the hospital — no need to go elsewhere after treatment.",
   },
   {
     icon: "person",
     title: "General Medicine & OPD",
-    desc: "Rozana OPD — bukhaar, BP, sugar, pet aur aam bimariyon ki jaanch aur ilaaj MD/MS doctors se.",
+    desc: "Daily OPD — check-up and treatment for fever, BP, sugar, stomach and common illnesses by MD/MS doctors.",
   },
   {
     icon: "clipboard",
     title: "Health Checkup Packages",
-    desc: "Poore parivaar ke liye preventive health checkup — bimari badi hone se pehle pata lagayein.",
+    desc: "Preventive health check-ups for the whole family — detect illness before it grows.",
   },
 ];
 
 export const CENTRES: { title: string; desc: string; points: string[] }[] = [
   {
     title: "Laser Proctology & Surgery Centre",
-    desc: "1,000+ surgeries performed. Dr. Ranvijay Bharti ke dwara laser aur laparoscopic surgery, hospital ke apne operation theatre me.",
+    desc: "1,000+ surgeries performed. Laser and laparoscopic surgery by Dr. Ranvijay Bharti, in the hospital's own operation theatre.",
     points: [
       "Laser piles, fissure & fistula — less pain, quicker recovery",
       "Hernia, appendix & gall bladder surgery",
@@ -137,16 +137,16 @@ export const CENTRES: { title: string; desc: string; points: string[] }[] = [
   },
   {
     title: "Women's Health & Maternity Centre",
-    desc: "Pregnancy ki pehli jaanch se delivery tak — Dr. Ritu Verma ke saath surakshit aur sammanjanak dekhbhaal, apne hi shahar me.",
+    desc: "From the first pregnancy check-up to delivery — safe and respectful care with Dr. Ritu Verma, in your own city.",
     points: [
       "Pregnancy care & regular checkups",
       "Normal delivery & C-section facility",
-      "Women's health problems ka poora ilaaj",
+      "Complete treatment for women's health problems",
     ],
   },
   {
     title: "24×7 Emergency & ICU Centre",
-    desc: "Emergency kabhi time dekh kar nahi aati. Isliye Doctors Divine din-raat khula hai — ICU, operation theatre aur trained staff har ghante ready.",
+    desc: "An emergency never comes at a convenient time. That is why Doctors Divine is open day and night — ICU, operation theatre and trained staff ready every hour.",
     points: [
       "10+ beds including dedicated ICU",
       "Centralised oxygen facility",
@@ -156,14 +156,14 @@ export const CENTRES: { title: string; desc: string; points: string[] }[] = [
 ];
 
 export const LAB_TESTS: { name: string; desc: string; report: string }[] = [
-  { name: "Complete Blood Count (CBC)", desc: "Khoon ki poori jaanch", report: "Same day report" },
-  { name: "Blood Sugar — Fasting / PP / HbA1c", desc: "Diabetes ki jaanch", report: "Same day report" },
-  { name: "Thyroid Profile (T3, T4, TSH)", desc: "Thyroid ki jaanch", report: "Next day report" },
-  { name: "Liver & Kidney Function (LFT / KFT)", desc: "Lever aur gurda jaanch", report: "Same day report" },
-  { name: "ECG", desc: "Dil ki jaanch — heart attack screening", report: "Turant report" },
-  { name: "Hormone Tests", desc: "Hormone profile jaanch", report: "2–3 day report" },
-  { name: "Full Body Health Checkup Package", desc: "Poore shareer ki saalana jaanch", report: "Next day report" },
-  { name: "Pregnancy Tests & Antenatal Profile", desc: "Garbhavastha ki zaroori jaanch", report: "Same day report" },
+  { name: "Complete Blood Count (CBC)", desc: "Complete blood test", report: "Same day report" },
+  { name: "Blood Sugar — Fasting / PP / HbA1c", desc: "Diabetes test", report: "Same day report" },
+  { name: "Thyroid Profile (T3, T4, TSH)", desc: "Thyroid test", report: "Next day report" },
+  { name: "Liver & Kidney Function (LFT / KFT)", desc: "Liver and kidney test", report: "Same day report" },
+  { name: "ECG", desc: "Heart test — heart attack screening", report: "Instant report" },
+  { name: "Hormone Tests", desc: "Hormone profile test", report: "2–3 day report" },
+  { name: "Full Body Health Checkup Package", desc: "Annual full-body test", report: "Next day report" },
+  { name: "Pregnancy Tests & Antenatal Profile", desc: "Essential pregnancy tests", report: "Same day report" },
 ];
 
 export type GalleryItem = {
@@ -184,35 +184,35 @@ export const GALLERY: GalleryItem[] = [
 
 export const FAQS: { q: string; a: string }[] = [
   {
-    q: "Kya hospital 24 ghante khula hai?",
-    a: "Haan. Doctors Divine 24×7 chalta hai — emergency care, ICU aur operation theatre din-raat ready hai. OPD ka time doctor ke hisaab se alag ho sakta hai, isliye online slot book karna ya call karke confirm karna sabse achha hai.",
+    q: "Is the hospital open 24 hours?",
+    a: "Yes. Doctors Divine runs 24×7 — emergency care, ICU and the operation theatre are ready day and night. OPD timings may vary by doctor, so booking a slot online or confirming by phone is best.",
   },
   {
-    q: "Hospital kahan hai?",
-    a: "Navin Nagar, Nawada, Bihar 805110 — Govardhan Mandir ke paas, Navin Nagar Road par.",
+    q: "Where is the hospital?",
+    a: "Navin Nagar, Nawada, Bihar 805110 — near Govardhan Temple, on Navin Nagar Road.",
   },
   {
-    q: "Kya Nawada me laser piles surgery hoti hai?",
-    a: "Haan. Dr. Ranvijay Bharti — general & laparoscopic surgeon aur proctologist — Doctors Divine me hi piles, fissure aur fistula ka laser treatment karte hain. Kam dard, jaldi recovery.",
+    q: "Is laser piles surgery available in Nawada?",
+    a: "Yes. Dr. Ranvijay Bharti — general & laparoscopic surgeon and proctologist — performs laser treatment for piles, fissure and fistula at Doctors Divine itself. Less pain, faster recovery.",
   },
   {
-    q: "Kya hospital me lab aur pharmacy hai?",
-    a: "Haan, hospital ki apni pathology lab aur pharmacy dono andar hi hain — jaanch aur dawai ke liye bahar nahi jaana padta.",
+    q: "Does the hospital have a lab and pharmacy?",
+    a: "Yes, the hospital has its own pathology lab and pharmacy inside — no need to go outside for tests or medicines.",
   },
   {
-    q: "Appointment kaise book karun?",
-    a: "Isi website par online book karein — doctor aur time slot khud chunein, token number turant milega. Chahein to WhatsApp ya call (+91 87973 03540) se bhi booking ho jati hai.",
+    q: "How do I book an appointment?",
+    a: "Book online on this website — choose the doctor and time slot yourself and get a token number instantly. You can also book via WhatsApp or by calling (+91 87973 03540).",
   },
   {
-    q: "Kya delivery (prasav) ki suvidha hai?",
-    a: "Haan. Dr. Ritu Verma ke nigrani me pregnancy care, normal delivery aur C-section — dono ki suvidha hospital me uplabdh hai.",
+    q: "Is delivery facility available?",
+    a: "Yes. Under Dr. Ritu Verma's supervision, pregnancy care, normal delivery and C-section — both facilities are available at the hospital.",
   },
 ];
 
 export const TIMINGS: { label: string; value: string }[] = [
-  { label: "Emergency / ICU", value: "24×7 — hamesha khula" },
-  { label: "OPD — Dr. Ranvijay Bharti", value: "Subah aur shaam — slot online book karein" },
-  { label: "OPD — Dr. Ritu Verma", value: "Subah aur shaam — slot online book karein" },
+  { label: "Emergency / ICU", value: "24×7 — always open" },
+  { label: "OPD — Dr. Ranvijay Bharti", value: "Morning and evening — book a slot online" },
+  { label: "OPD — Dr. Ritu Verma", value: "Morning and evening — book a slot online" },
   { label: "Pathology Lab", value: "24-hour sample collection" },
   { label: "Pharmacy", value: "24×7" },
 ];

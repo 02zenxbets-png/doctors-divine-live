@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
     email_3: cleanEmail(body.email_3),
   });
   if (error) {
-    return NextResponse.json({ error: "Settings save nahi ho payi." }, { status: 500 });
+    return NextResponse.json({ error: "Settings could not be saved." }, { status: 500 });
   }
   return NextResponse.json({ ok: true });
 }

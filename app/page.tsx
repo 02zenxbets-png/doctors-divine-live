@@ -52,9 +52,9 @@ export default function HomePage() {
             Trusted care for every village of Nawada
           </h1>
           <p className="mt-3 max-w-xl text-sm text-gray-200 sm:text-base">
-            Surgery, maternity aur 24×7 emergency care — ab Patna jaane ki
-            zaroorat nahi. Appointment online, sirf 30 second me — doctor
-            chunein, time slot chunein, token number turant paayein.
+            Surgery, maternity and 24×7 emergency care — no need to go to Patna
+            anymore. Book an appointment online in just 30 seconds — choose a
+            doctor, choose a time slot, get your token number instantly.
           </p>
           <div className="mt-5 flex flex-wrap gap-3">
             <Link
@@ -98,7 +98,7 @@ export default function HomePage() {
       <section id="services" className="mx-auto max-w-6xl px-4 py-12">
         <SectionTitle
           title="Everything a family needs, under one roof"
-          sub="OPD se lekar surgery, delivery, lab aur dawai — poora ilaaj ek hi jagah, Navin Nagar me."
+          sub="From OPD to surgery, delivery, lab and medicines — complete treatment at one place, in Navin Nagar."
         />
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {SERVICES.map((s) => (
@@ -115,7 +115,7 @@ export default function HomePage() {
       <section className="mx-auto max-w-6xl px-4 py-12">
         <SectionTitle
           title="Specialist care centres"
-          sub="Trusted care in Nawada since 2020 — jahan ilaaj ke liye Patna tak jaana padta tha, wahi suvidha ab ghar ke paas."
+          sub="Trusted care in Nawada since 2020 — the facilities you once had to travel to Patna for are now close to home."
         />
         <div className="mt-8 grid gap-4 lg:grid-cols-3">
           {CENTRES.map((c) => (
@@ -136,7 +136,7 @@ export default function HomePage() {
       <section id="doctors" className="mx-auto max-w-6xl px-4 py-12">
         <SectionTitle
           title="Doctors who understand you"
-          sub="MD aur MS specialists — Nawada me hi, Patna jaane ki zaroorat nahi."
+          sub="MD and MS specialists — right here in Nawada, no need to go to Patna."
         />
         <div className="mt-8 grid gap-4 md:grid-cols-2">
           {DOCTORS.map((d) => (
@@ -154,7 +154,7 @@ export default function HomePage() {
               <div className="mt-4 flex gap-2">
                 <Link href="/book" className="btn-primary inline-flex items-center gap-1.5"><CalendarIcon className="h-4 w-4" /> Book Appointment</Link>
                 <a
-                  href={`https://wa.me/918797303540?text=${encodeURIComponent(`Namaste, mujhe ${d.name} se milna hai`)}`}
+                  href={`https://wa.me/918797303540?text=${encodeURIComponent(`Hello, I would like to meet ${d.name}`)}`}
                   target="_blank"
                   rel="noreferrer"
                   className="btn-secondary inline-flex items-center gap-1.5"
@@ -166,8 +166,8 @@ export default function HomePage() {
           ))}
         </div>
         <p className="mt-4 text-center text-sm text-brand-muted">
-          Koi doctor nahi mila — hospital ko call karein, hum sahi specialist se
-          milwayenge:{" "}
+          Could not find a doctor? Call the hospital and we will connect you
+          with the right specialist:{" "}
           <a href={`tel:${HOSPITAL.phoneHref}`} className="font-bold text-brand-red">{HOSPITAL.phoneDisplay}</a>
         </p>
       </section>
@@ -175,8 +175,8 @@ export default function HomePage() {
       {/* Lab */}
       <section id="lab" className="mx-auto max-w-6xl px-4 py-12">
         <SectionTitle
-          title="Book a lab test — ghar baithe"
-          sub="Hospital ki apni lab — sahi report, sahi samay par. 24-hour sample collection available. Test book karne ke liye WhatsApp ya call karein."
+          title="Book a lab test — from home"
+          sub="The hospital's own lab — accurate reports, on time. 24-hour sample collection available. To book a test, WhatsApp or call us."
         />
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {LAB_TESTS.map((t) => (
@@ -194,7 +194,7 @@ export default function HomePage() {
             rel="noreferrer"
             className="inline-flex items-center gap-1.5 btn-secondary"
           >
-            <ChatIcon className="h-4 w-4" /> WhatsApp par test book karein
+            <ChatIcon className="h-4 w-4" /> Book a test on WhatsApp
           </a>
         </div>
       </section>
@@ -202,8 +202,8 @@ export default function HomePage() {
       {/* Gallery — honest labeling */}
       <section className="mx-auto max-w-6xl px-4 py-12">
         <SectionTitle
-          title="Dekhein apna hospital"
-          sub="Team, building aur surgery ki photos hospital ki apni asli photos hain. Baaki facility photos illustrative hain — suvidha samjhane ke liye."
+          title="See your hospital"
+          sub="The team, building and surgery photos are the hospital's own real photos. The other facility photos are illustrative — to explain the facilities."
         />
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {GALLERY.map((g) => (
@@ -226,7 +226,7 @@ export default function HomePage() {
 
       {/* FAQs */}
       <section id="faqs" className="mx-auto max-w-3xl px-4 py-12">
-        <SectionTitle title="Aksar poochhe jaane wale sawaal" />
+        <SectionTitle title="Frequently asked questions" />
         <div className="mt-8 space-y-3">
           {FAQS.map((f) => (
             <details key={f.q} className="rounded-2xl border border-brand-line p-5">
@@ -239,24 +239,24 @@ export default function HomePage() {
 
       {/* Visit us */}
       <section id="visit" className="mx-auto max-w-6xl px-4 pt-12 pb-16">
-        <SectionTitle title="Hospital aayein" />
+        <SectionTitle title="Visit Us" />
         <div className="mt-8 grid gap-4 lg:grid-cols-2">
           <div className="rounded-2xl border border-brand-line p-6">
             <p className="font-bold"><PinIcon className="mr-1 inline h-4 w-4 align-middle" /> {HOSPITAL.name}</p>
             {HOSPITAL.addressLines.map((l) => (
               <p key={l} className="text-sm text-brand-muted">{l}</p>
             ))}
-            <p className="mt-4 text-sm"><PhoneIcon className="mr-1 inline h-4 w-4 align-middle" /> <a href={`tel:${HOSPITAL.phoneHref}`} className="font-bold text-brand-red">{HOSPITAL.phoneDisplay}</a> — Emergency aur appointment, 24×7</p>
+            <p className="mt-4 text-sm"><PhoneIcon className="mr-1 inline h-4 w-4 align-middle" /> <a href={`tel:${HOSPITAL.phoneHref}`} className="font-bold text-brand-red">{HOSPITAL.phoneDisplay}</a> — Emergency and appointments, 24×7</p>
             <p className="mt-1 text-sm"><PhoneIcon className="mr-1 inline h-4 w-4 align-middle" /> <a href={`tel:${HOSPITAL.phoneAltHref}`} className="font-bold text-brand-red">{HOSPITAL.phoneAltDisplay}</a> — Appointments</p>
             <p className="mt-1 text-sm"><MailIcon className="mr-1 inline h-4 w-4 align-middle" /> {HOSPITAL.email}</p>
             <p className="mt-1 text-sm"><GlobeIcon className="mr-1 inline h-4 w-4 align-middle" /> {HOSPITAL.website}</p>
             <div className="mt-5 flex flex-wrap gap-2">
               <Link href="/book" className="btn-primary inline-flex items-center gap-1.5"><CalendarIcon className="h-4 w-4" /> Book Appointment</Link>
-              <a href={HOSPITAL.whatsappHref} target="_blank" rel="noreferrer" className="btn-secondary inline-flex items-center gap-1.5"><ChatIcon className="h-4 w-4" /> WhatsApp karein</a>
+              <a href={HOSPITAL.whatsappHref} target="_blank" rel="noreferrer" className="btn-secondary inline-flex items-center gap-1.5"><ChatIcon className="h-4 w-4" /> WhatsApp us</a>
             </div>
             <p className="mt-5 rounded-xl bg-amber-50 p-4 text-sm">
-              <BulbIcon className="mr-1 inline h-4 w-4 align-middle" /> <b>Tip:</b> Bheed se bachne ke liye aane se pehle online token
-              book kar lein — aapka number aate hi doctor se mulaqat ho jayegi.
+              <BulbIcon className="mr-1 inline h-4 w-4 align-middle" /> <b>Tip:</b> To avoid the crowd, book an online token
+              before coming — you will meet the doctor as soon as your number comes.
             </p>
           </div>
           <div className="rounded-2xl border border-brand-line p-6">
@@ -270,10 +270,10 @@ export default function HomePage() {
               ))}
             </ul>
             <p className="mt-5 rounded-xl bg-red-50 p-4 text-sm">
-              <AlertIcon className="mr-1 inline h-4 w-4 align-middle" /> <b>Emergency me kya karein?</b> Booking ka wait na karein.
-              Turant <a href={`tel:${HOSPITAL.phoneHref}`} className="font-bold text-brand-red">{HOSPITAL.phoneDisplay}</a> par
-              call karke hospital ko batayein aur seedha Navin Nagar hospital
-              pahunchein — team taiyaar milegi.
+              <AlertIcon className="mr-1 inline h-4 w-4 align-middle" /> <b>What to do in an emergency?</b> Do not wait for a booking.
+              Call <a href={`tel:${HOSPITAL.phoneHref}`} className="font-bold text-brand-red">{HOSPITAL.phoneDisplay}</a> immediately to
+              inform the hospital and come straight to the Navin Nagar hospital
+              — the team will be ready.
             </p>
           </div>
         </div>
