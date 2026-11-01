@@ -35,9 +35,21 @@ body {
   background: rgba(2, 135, 222, 0.28);
 }
 
+/* Form fields: explicit dark field + white text. Without this, the browser's
+   light-mode white field + inherited white page text made typed letters
+   invisible (typing worked, nothing showed). */
 input,
-textarea {
+textarea,
+select {
+  background-color: #0a1017;
+  color: #ffffff;
   caret-color: #0287de;
+}
+
+/* Dark calendar picker + time controls on date inputs. */
+input[type="date"],
+input[type="time"] {
+  color-scheme: dark;
 }
 
 ::placeholder {
