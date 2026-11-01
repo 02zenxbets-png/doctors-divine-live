@@ -236,7 +236,7 @@ export default function DashboardPage() {
           <button
             type="submit"
             disabled={unlocking}
-            className="w-full rounded-xl bg-gray-900 py-3 text-sm font-bold text-white disabled:opacity-60"
+            className="w-full btn-primary"
           >
             {unlocking ? "Checking…" : "Unlock bookings"}
           </button>
@@ -360,7 +360,7 @@ export default function DashboardPage() {
                   )}
                 </p>
                 <p className="text-sm text-brand-muted">
-                  Token <b className="text-brand-darkred">{b.token}</b> · {b.doctor} · {b.date} · {b.time_slot}
+                  Token <b className="tnum text-brand-darkred">{b.token}</b> · {b.doctor} · {b.date} · {b.time_slot}
                 </p>
                 <p className="text-sm text-brand-muted">
                   📱 {b.mobile}
@@ -376,13 +376,13 @@ export default function DashboardPage() {
               </div>
               <div className="flex flex-wrap gap-2">
                 {b.status !== "confirmed" && (
-                  <button onClick={() => act(b.id, "status", "confirmed")} className="rounded-lg bg-gray-900 px-3 py-1.5 text-xs font-bold text-white">Confirm</button>
+                  <button onClick={() => act(b.id, "status", "confirmed")} className="rounded-lg bg-white px-3 py-1.5 text-xs font-bold text-brand-ink ring-1 ring-inset ring-brand-line hover:bg-brand-bg">Confirm</button>
                 )}
                 {b.status !== "done" && (
-                  <button onClick={() => act(b.id, "status", "done")} className="rounded-lg bg-gray-700 px-3 py-1.5 text-xs font-bold text-white">Mark done</button>
+                  <button onClick={() => act(b.id, "status", "done")} className="rounded-lg bg-white px-3 py-1.5 text-xs font-bold text-brand-ink ring-1 ring-inset ring-brand-line hover:bg-brand-bg">Mark done</button>
                 )}
                 {b.status !== "cancelled" && (
-                  <button onClick={() => act(b.id, "status", "cancelled")} className="rounded-lg bg-white px-3 py-1.5 text-xs font-bold text-gray-900 ring-1 ring-gray-300">Cancel</button>
+                  <button onClick={() => act(b.id, "status", "cancelled")} className="rounded-lg bg-white px-3 py-1.5 text-xs font-bold text-brand-ink ring-1 ring-inset ring-brand-line hover:bg-brand-bg">Cancel</button>
                 )}
                 {b.email_status === "failed" && (
                   <button onClick={() => act(b.id, "retry")} className="rounded-lg bg-amber-600 px-3 py-1.5 text-xs font-bold text-white">Retry email</button>
@@ -395,7 +395,7 @@ export default function DashboardPage() {
       </div>
 
       {/* Email settings */}
-      <section className="mt-10 rounded-2xl border border-brand-line p-5">
+      <section className="mt-8 rounded-2xl border border-brand-line p-5">
         <h2 className="font-extrabold">Booking email alerts</h2>
         <p className="mt-1 text-sm text-brand-muted">
           Har nayi booking ki details in 3 email addresses par bheji jayegi.{" "}
@@ -425,7 +425,7 @@ export default function DashboardPage() {
             type="email"
             className="rounded-lg border border-brand-line px-3 py-2 text-sm"
           />
-          <button type="submit" className="rounded-lg bg-gray-900 px-4 py-2 text-sm font-bold text-white sm:col-span-3 sm:w-auto sm:justify-self-start">
+          <button type="submit" className="btn-primary sm:col-span-3 sm:w-auto sm:justify-self-start">
             Save emails
           </button>
         </form>
@@ -433,7 +433,7 @@ export default function DashboardPage() {
       </section>
 
       {/* Admin password section */}
-      <section className="mt-4 rounded-2xl border border-brand-line p-5">
+      <section className="mt-8 rounded-2xl border border-brand-line p-5">
         <h2 className="font-extrabold">Admin password — Doctor only</h2>
         <p className="mt-1 text-sm text-brand-muted">
           Dashboard ka password Vercel ke env vars me <code className="bg-gray-100 px-1">ADMIN_PASSWORD_HASH</code> se

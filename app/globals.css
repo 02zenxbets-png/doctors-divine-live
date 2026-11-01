@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  /* One shared primary button — Book Appointment and form submits. */
+  .btn-primary {
+    @apply rounded-xl bg-brand-red px-5 py-3 text-sm font-bold text-white shadow hover:bg-brand-darkred disabled:opacity-60;
+  }
+  /* One shared secondary button — call / WhatsApp / outline actions. */
+  .btn-secondary {
+    @apply rounded-xl border border-brand-line bg-white px-5 py-3 text-sm font-bold text-brand-ink hover:bg-brand-bg;
+  }
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -12,4 +23,29 @@ body {
   font-family: ui-sans-system, system-ui, -apple-system, "Segoe UI", Roboto,
     sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Browser surfaces, themed from the palette (not left as defaults). */
+:focus-visible {
+  outline: 2px solid #b91c1c;
+  outline-offset: 2px;
+}
+
+::selection {
+  background: rgba(185, 28, 28, 0.16);
+}
+
+input,
+textarea {
+  caret-color: #b91c1c;
+}
+
+::placeholder {
+  color: #6b7280;
+  opacity: 1;
+}
+
+/* Tabular numerals for tokens, dates, and other figures. */
+.tnum {
+  font-variant-numeric: tabular-nums;
 }

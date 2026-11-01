@@ -91,7 +91,7 @@ export default function BookPage() {
         </p>
         <div className="mx-auto mt-6 max-w-sm rounded-2xl border border-brand-line bg-brand-bg p-6">
           <p className="text-xs font-bold uppercase tracking-widest text-brand-muted">Your Token Number</p>
-          <p className="mt-1 text-4xl font-extrabold text-brand-darkred">{done.token}</p>
+          <p className="tnum mt-1 text-4xl font-extrabold text-brand-darkred">{done.token}</p>
           <p className="mt-3 text-sm">
             {done.patientName} · {done.doctor}
           </p>
@@ -104,11 +104,11 @@ export default function BookPage() {
             href={`https://wa.me/918797303540?text=${waText}`}
             target="_blank"
             rel="noreferrer"
-            className="rounded-lg bg-green-700 px-4 py-2 text-sm font-bold text-white"
+            className="btn-secondary"
           >
             💬 WhatsApp par confirm karein
           </a>
-          <a href={`tel:${HOSPITAL.phoneHref}`} className="rounded-lg border border-brand-line px-4 py-2 text-sm font-bold">
+          <a href={`tel:${HOSPITAL.phoneHref}`} className="btn-secondary">
             ☎ Hospital ko call karein
           </a>
         </div>
@@ -139,10 +139,11 @@ export default function BookPage() {
       key={s}
       type="button"
       onClick={() => setSlot(s)}
+      aria-pressed={slot === s}
       className={`rounded-lg px-3 py-2 text-sm font-bold ${
         slot === s
           ? "bg-brand-darkred text-white"
-          : "bg-gray-900 text-white hover:bg-gray-700"
+          : "bg-gray-100 text-brand-ink hover:bg-gray-200"
       }`}
     >
       {s}
@@ -166,6 +167,7 @@ export default function BookPage() {
                 key={d}
                 type="button"
                 onClick={() => setDoctor(d)}
+                aria-pressed={doctor === d}
                 className={`rounded-lg px-3 py-2 text-sm font-bold ${
                   doctor === d ? "bg-brand-darkred text-white" : "bg-gray-100 text-brand-ink"
                 }`}
@@ -239,7 +241,7 @@ export default function BookPage() {
         <button
           type="submit"
           disabled={saving}
-          className="w-full rounded-xl bg-brand-darkred py-3 text-sm font-bold text-white disabled:opacity-60"
+          className="w-full btn-primary"
         >
           {saving ? "Booking save ho rahi hai…" : "✓ Confirm Booking"}
         </button>

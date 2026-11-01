@@ -11,11 +11,10 @@ import {
   TIMINGS,
 } from "@/lib/data";
 
-function SectionTitle({ kicker, title, sub }: { kicker: string; title: string; sub?: string }) {
+function SectionTitle({ title, sub }: { title: string; sub?: string }) {
   return (
     <div className="mx-auto max-w-2xl text-center">
-      <p className="text-xs font-extrabold uppercase tracking-widest text-brand-red">{kicker}</p>
-      <h2 className="mt-2 text-2xl font-extrabold text-brand-ink sm:text-3xl">{title}</h2>
+      <h2 className="text-2xl font-extrabold text-brand-ink sm:text-3xl">{title}</h2>
       {sub && <p className="mt-2 text-sm text-brand-muted">{sub}</p>}
     </div>
   );
@@ -37,10 +36,7 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10" />
         </div>
         <div className="absolute inset-x-0 bottom-0 mx-auto max-w-6xl px-4 pb-8 text-white">
-          <p className="text-xs font-bold uppercase tracking-widest text-red-200">
-            📍 Navin Nagar, Nawada · Since 2020
-          </p>
-          <h1 className="mt-2 max-w-2xl text-3xl font-extrabold leading-tight sm:text-5xl">
+          <h1 className="max-w-2xl text-3xl font-extrabold leading-tight sm:text-5xl">
             Trusted care for every village of Nawada
           </h1>
           <p className="mt-3 max-w-xl text-sm text-gray-200 sm:text-base">
@@ -51,13 +47,13 @@ export default function HomePage() {
           <div className="mt-5 flex flex-wrap gap-3">
             <Link
               href="/book"
-              className="rounded-xl bg-brand-red px-5 py-3 text-sm font-bold text-white shadow hover:bg-brand-darkred"
+              className="btn-primary shadow"
             >
               📅 Book Appointment
             </Link>
             <a
               href={`tel:${HOSPITAL.phoneHref}`}
-              className="rounded-xl bg-white px-5 py-3 text-sm font-bold text-brand-ink shadow"
+              className="btn-secondary shadow"
             >
               ☎ {HOSPITAL.phoneDisplay}
             </a>
@@ -87,9 +83,8 @@ export default function HomePage() {
       </section>
 
       {/* Services */}
-      <section id="services" className="mx-auto max-w-6xl px-4 py-6">
+      <section id="services" className="mx-auto max-w-6xl px-4 py-12">
         <SectionTitle
-          kicker="Our Services"
           title="Everything a family needs, under one roof"
           sub="OPD se lekar surgery, delivery, lab aur dawai — poora ilaaj ek hi jagah, Navin Nagar me."
         />
@@ -107,7 +102,6 @@ export default function HomePage() {
       {/* Centres */}
       <section className="mx-auto max-w-6xl px-4 py-12">
         <SectionTitle
-          kicker="Centres of Excellence"
           title="Specialist care centres"
           sub="Trusted care in Nawada since 2020 — jahan ilaaj ke liye Patna tak jaana padta tha, wahi suvidha ab ghar ke paas."
         />
@@ -127,9 +121,8 @@ export default function HomePage() {
       </section>
 
       {/* Doctors */}
-      <section id="doctors" className="mx-auto max-w-6xl px-4 py-6">
+      <section id="doctors" className="mx-auto max-w-6xl px-4 py-12">
         <SectionTitle
-          kicker="Find a Doctor"
           title="Doctors who understand you"
           sub="MD aur MS specialists — Nawada me hi, Patna jaane ki zaroorat nahi."
         />
@@ -147,12 +140,12 @@ export default function HomePage() {
               </div>
               <p className="mt-3 text-xs font-semibold text-brand-muted">● {d.opd}</p>
               <div className="mt-4 flex gap-2">
-                <Link href="/book" className="rounded-lg bg-brand-ink px-4 py-2 text-sm font-bold text-white">📅 Book Appointment</Link>
+                <Link href="/book" className="btn-primary">📅 Book Appointment</Link>
                 <a
                   href={`https://wa.me/918797303540?text=${encodeURIComponent(`Namaste, mujhe ${d.name} se milna hai`)}`}
                   target="_blank"
                   rel="noreferrer"
-                  className="rounded-lg border border-brand-line px-4 py-2 text-sm font-bold"
+                  className="btn-secondary"
                 >
                   💬 WhatsApp
                 </a>
@@ -170,7 +163,6 @@ export default function HomePage() {
       {/* Lab */}
       <section id="lab" className="mx-auto max-w-6xl px-4 py-12">
         <SectionTitle
-          kicker="Pathology Lab"
           title="Book a lab test — ghar baithe"
           sub="Hospital ki apni lab — sahi report, sahi samay par. 24-hour sample collection available. Test book karne ke liye WhatsApp ya call karein."
         />
@@ -188,7 +180,7 @@ export default function HomePage() {
             href={HOSPITAL.whatsappHref}
             target="_blank"
             rel="noreferrer"
-            className="inline-block rounded-xl bg-green-700 px-5 py-3 text-sm font-bold text-white"
+            className="inline-block btn-secondary"
           >
             💬 WhatsApp par test book karein
           </a>
@@ -196,9 +188,8 @@ export default function HomePage() {
       </section>
 
       {/* Gallery — honest labeling */}
-      <section className="mx-auto max-w-6xl px-4 py-6">
+      <section className="mx-auto max-w-6xl px-4 py-12">
         <SectionTitle
-          kicker="Inside the Hospital"
           title="Dekhein apna hospital"
           sub="Team, building aur surgery ki photos hospital ki apni asli photos hain. Baaki facility photos illustrative hain — suvidha samjhane ke liye."
         />
@@ -223,7 +214,7 @@ export default function HomePage() {
 
       {/* FAQs */}
       <section id="faqs" className="mx-auto max-w-3xl px-4 py-12">
-        <SectionTitle kicker="FAQs" title="Aksar poochhe jaane wale sawaal" />
+        <SectionTitle title="Aksar poochhe jaane wale sawaal" />
         <div className="mt-8 space-y-3">
           {FAQS.map((f) => (
             <details key={f.q} className="rounded-2xl border border-brand-line p-5">
@@ -235,8 +226,8 @@ export default function HomePage() {
       </section>
 
       {/* Visit us */}
-      <section id="visit" className="mx-auto max-w-6xl px-4 pb-16">
-        <SectionTitle kicker="Visit Us" title="Hospital aayein" />
+      <section id="visit" className="mx-auto max-w-6xl px-4 pt-12 pb-16">
+        <SectionTitle title="Hospital aayein" />
         <div className="mt-8 grid gap-4 lg:grid-cols-2">
           <div className="rounded-2xl border border-brand-line p-6">
             <p className="font-bold">📍 {HOSPITAL.name}</p>
@@ -248,8 +239,8 @@ export default function HomePage() {
             <p className="mt-1 text-sm">✉ {HOSPITAL.email}</p>
             <p className="mt-1 text-sm">🌐 {HOSPITAL.website}</p>
             <div className="mt-5 flex flex-wrap gap-2">
-              <Link href="/book" className="rounded-lg bg-brand-darkred px-4 py-2 text-sm font-bold text-white">📅 Book Appointment</Link>
-              <a href={HOSPITAL.whatsappHref} target="_blank" rel="noreferrer" className="rounded-lg border border-brand-line px-4 py-2 text-sm font-bold">💬 WhatsApp karein</a>
+              <Link href="/book" className="btn-primary">📅 Book Appointment</Link>
+              <a href={HOSPITAL.whatsappHref} target="_blank" rel="noreferrer" className="btn-secondary">💬 WhatsApp karein</a>
             </div>
             <p className="mt-5 rounded-xl bg-amber-50 p-4 text-sm">
               💡 <b>Tip:</b> Bheed se bachne ke liye aane se pehle online token
