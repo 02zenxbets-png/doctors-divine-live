@@ -84,42 +84,42 @@ export const EVENING_SLOTS = [
 
 export const SERVICES: { icon: string; title: string; desc: string }[] = [
   {
-    icon: "🔬",
+    icon: "target",
     title: "Laser Proctology",
     desc: "Piles, fissure aur fistula ka laser treatment — kam dard, jaldi recovery, aksar same-day discharge.",
   },
   {
-    icon: "🩺",
+    icon: "scissors",
     title: "General & Laparoscopic Surgery",
     desc: "Hernia, appendix, gall bladder aur planned/emergency surgery — apne hi operation theatre me.",
   },
   {
-    icon: "🤰",
+    icon: "heart",
     title: "Maternity & Women's Health",
     desc: "Pregnancy care, normal delivery, C-section aur mahilaon ki har health problem ka ilaaj.",
   },
   {
-    icon: "🚨",
+    icon: "alert",
     title: "24×7 Emergency & ICU",
     desc: "Din ho ya raat — emergency care, ICU beds aur OT har samay ready. Centralised oxygen facility.",
   },
   {
-    icon: "🧪",
+    icon: "flask",
     title: "Pathology Lab",
     desc: "Hospital ki apni lab — blood tests, hormone tests, ECG aur health packages. 24-hour sample collection.",
   },
   {
-    icon: "💊",
+    icon: "capsule",
     title: "In-house Pharmacy",
     desc: "Hospital ke andar hi dawai ki dukaan — ilaaj ke baad bahar bhatakna nahi padta.",
   },
   {
-    icon: "👨‍⚕️",
+    icon: "person",
     title: "General Medicine & OPD",
     desc: "Rozana OPD — bukhaar, BP, sugar, pet aur aam bimariyon ki jaanch aur ilaaj MD/MS doctors se.",
   },
   {
-    icon: "❤️",
+    icon: "clipboard",
     title: "Health Checkup Packages",
     desc: "Poore parivaar ke liye preventive health checkup — bimari badi hone se pehle pata lagayein.",
   },

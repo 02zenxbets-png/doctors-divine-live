@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import "./globals.css";
 import { HOSPITAL } from "@/lib/data";
+import { ChatIcon, GlobeIcon, MailIcon, PhoneIcon, PinIcon } from "./icons";
 
 export const metadata: Metadata = {
   title: "Doctors Divine Multispeciality Hospital — Nawada | 24×7 Emergency",
@@ -45,9 +46,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <NavLink href="/dashboard">Dashboard</NavLink>
               <a
                 href={`tel:${HOSPITAL.phoneHref}`}
-                className="ml-1 hidden rounded-lg bg-brand-ink px-3 py-2 text-sm font-bold text-white sm:block"
+                className="ml-1 hidden items-center gap-1.5 rounded-lg bg-brand-ink px-3 py-2 text-sm font-bold text-white sm:inline-flex"
               >
-                ☎ Call
+                <PhoneIcon className="h-4 w-4" /> Call
               </a>
             </nav>
           </div>
@@ -78,11 +79,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div>
               <p className="text-sm font-bold">Contact</p>
               <ul className="mt-2 space-y-1 text-sm text-brand-muted">
-                <li>☎ <a href={`tel:${HOSPITAL.phoneHref}`} className="hover:underline">{HOSPITAL.phoneDisplay}</a></li>
-                <li>☎ <a href={`tel:${HOSPITAL.phoneAltHref}`} className="hover:underline">{HOSPITAL.phoneAltDisplay}</a></li>
-                <li>✉ {HOSPITAL.email}</li>
-                <li>📍 {HOSPITAL.addressShort}</li>
-                <li>🌐 {HOSPITAL.website}</li>
+                <li><PhoneIcon className="mr-1 inline h-4 w-4 align-middle" /> <a href={`tel:${HOSPITAL.phoneHref}`} className="hover:underline">{HOSPITAL.phoneDisplay}</a></li>
+                <li><PhoneIcon className="mr-1 inline h-4 w-4 align-middle" /> <a href={`tel:${HOSPITAL.phoneAltHref}`} className="hover:underline">{HOSPITAL.phoneAltDisplay}</a></li>
+                <li><MailIcon className="mr-1 inline h-4 w-4 align-middle" /> {HOSPITAL.email}</li>
+                <li><PinIcon className="mr-1 inline h-4 w-4 align-middle" /> {HOSPITAL.addressShort}</li>
+                <li><GlobeIcon className="mr-1 inline h-4 w-4 align-middle" /> {HOSPITAL.website}</li>
               </ul>
             </div>
           </div>
@@ -93,8 +94,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         {/* Mobile sticky Call / WhatsApp / Book bar */}
         <div className="fixed inset-x-0 bottom-0 z-40 flex border-t border-brand-line bg-white sm:hidden">
-          <a href={`tel:${HOSPITAL.phoneHref}`} className="flex-1 py-3 text-center text-sm font-bold">☎ Call</a>
-          <a href={HOSPITAL.whatsappHref} target="_blank" rel="noreferrer" className="flex-1 border-x border-brand-line py-3 text-center text-sm font-bold text-green-700">💬 WhatsApp</a>
+          <a href={`tel:${HOSPITAL.phoneHref}`} className="flex-1 inline-flex items-center justify-center gap-1 py-3 text-center text-sm font-bold"><PhoneIcon className="h-4 w-4" /> Call</a>
+          <a href={HOSPITAL.whatsappHref} target="_blank" rel="noreferrer" className="flex-1 inline-flex items-center justify-center gap-1 border-x border-brand-line py-3 text-center text-sm font-bold text-green-700"><ChatIcon className="h-4 w-4" /> WhatsApp</a>
           <Link href="/book" className="flex-1 bg-brand-darkred py-3 text-center text-sm font-bold text-white">Book Appointment</Link>
         </div>
         {/* Spacer so the sticky bar never covers footer content on mobile */}

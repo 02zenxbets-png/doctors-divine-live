@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { DOCTORS, EVENING_SLOTS, HOSPITAL, MORNING_SLOTS } from "@/lib/data";
+import { ChatIcon, CheckIcon, MoonIcon, PhoneIcon, SunIcon } from "../icons";
 
 type Done = {
   token: string;
@@ -84,7 +85,7 @@ export default function BookPage() {
     );
     return (
       <div className="mx-auto max-w-xl px-4 py-16 text-center">
-        <p className="text-5xl">✓</p>
+        <CheckIcon className="mx-auto h-12 w-12 text-green-600" />
         <h1 className="mt-4 text-2xl font-extrabold">Booking ho gayi!</h1>
         <p className="mt-2 text-sm text-brand-muted">
           Hospital aate waqt ye token number reception par dikhayein.
@@ -104,12 +105,12 @@ export default function BookPage() {
             href={`https://wa.me/918797303540?text=${waText}`}
             target="_blank"
             rel="noreferrer"
-            className="btn-secondary"
+            className="btn-secondary inline-flex items-center gap-1.5"
           >
-            💬 WhatsApp par confirm karein
+            <ChatIcon className="h-4 w-4" /> WhatsApp par confirm karein
           </a>
-          <a href={`tel:${HOSPITAL.phoneHref}`} className="btn-secondary">
-            ☎ Hospital ko call karein
+          <a href={`tel:${HOSPITAL.phoneHref}`} className="btn-secondary inline-flex items-center gap-1.5">
+            <PhoneIcon className="h-4 w-4" /> Hospital ko call karein
           </a>
         </div>
         <button
@@ -188,9 +189,9 @@ export default function BookPage() {
             className="mt-2 w-full rounded-lg border border-brand-line px-3 py-2 text-sm"
             required
           />
-          <p className="mt-4 text-xs font-extrabold uppercase tracking-widest text-brand-muted">☀️ Morning OPD</p>
+          <p className="mt-4 text-xs font-extrabold uppercase tracking-widest text-brand-muted"><SunIcon className="mr-1 inline h-4 w-4 align-middle" /> Morning OPD</p>
           <div className="mt-2 flex flex-wrap gap-2">{MORNING_SLOTS.map(slotBtn)}</div>
-          <p className="mt-4 text-xs font-extrabold uppercase tracking-widest text-brand-muted">🌙 Evening OPD</p>
+          <p className="mt-4 text-xs font-extrabold uppercase tracking-widest text-brand-muted"><MoonIcon className="mr-1 inline h-4 w-4 align-middle" /> Evening OPD</p>
           <div className="mt-2 flex flex-wrap gap-2">{EVENING_SLOTS.map(slotBtn)}</div>
         </div>
 
@@ -241,9 +242,9 @@ export default function BookPage() {
         <button
           type="submit"
           disabled={saving}
-          className="w-full btn-primary"
+          className="w-full btn-primary inline-flex items-center justify-center gap-1.5"
         >
-          {saving ? "Booking save ho rahi hai…" : "✓ Confirm Booking"}
+          {saving ? "Booking save ho rahi hai…" : (<><CheckIcon className="h-4 w-4" /> Confirm Booking</>)}
         </button>
       </form>
 

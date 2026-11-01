@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { AlertIcon, LockIcon, PhoneIcon } from "../icons";
 
 type Booking = {
   id: string;
@@ -215,7 +216,7 @@ export default function DashboardPage() {
   if (phase === "locked") {
     return (
       <div className="mx-auto max-w-md px-4 py-16">
-        <p className="text-4xl">🔒</p>
+        <LockIcon className="h-9 w-9 text-brand-muted" />
         <h1 className="mt-3 text-2xl font-extrabold">Dashboard — Doctor only</h1>
         <p className="mt-2 text-sm text-brand-muted">
           Bookings sirf doctor dekh sakta hai. Admin password daalein.
@@ -242,7 +243,7 @@ export default function DashboardPage() {
           </button>
         </form>
         <p className="mt-4 rounded-xl bg-amber-50 p-4 text-xs text-amber-800">
-          ⚠️ Password ka koi recovery/reset nahi hai — bhool gaye to bookings is
+          <AlertIcon className="mr-1 inline h-4 w-4 align-middle" /> Password ka koi recovery/reset nahi hai — bhool gaye to bookings is
           dashboard se nahi khulengi. Password safe jagah likh kar rakho; reset
           ke liye Vercel me ADMIN_PASSWORD_HASH badalna hoga (README dekhein).
         </p>
@@ -285,7 +286,7 @@ export default function DashboardPage() {
       {banner && (
         <div className="mt-4 flex items-start justify-between gap-3 rounded-2xl bg-green-50 px-4 py-3">
           <p className="text-sm font-semibold text-green-800">
-            🟢 New booking just arrived — {banner.patient_name}, token {banner.token}, {banner.date} · {banner.time_slot}
+            <span className="mr-1 inline-block h-2.5 w-2.5 rounded-full bg-green-500 align-middle" /> New booking just arrived — {banner.patient_name}, token {banner.token}, {banner.date} · {banner.time_slot}
           </p>
           <button onClick={() => setBanner(null)} className="text-sm font-bold text-green-800">✕</button>
         </div>
@@ -363,7 +364,7 @@ export default function DashboardPage() {
                   Token <b className="tnum text-brand-darkred">{b.token}</b> · {b.doctor} · {b.date} · {b.time_slot}
                 </p>
                 <p className="text-sm text-brand-muted">
-                  📱 {b.mobile}
+                  <PhoneIcon className="mr-1 inline h-4 w-4 align-middle" /> {b.mobile}
                   {b.age ? ` · Age ${b.age}` : ""}
                   {b.area ? ` · ${b.area}` : ""}
                   {b.problem ? ` · ${b.problem}` : ""}

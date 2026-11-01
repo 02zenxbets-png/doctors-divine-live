@@ -10,6 +10,18 @@ import {
   SERVICES,
   TIMINGS,
 } from "@/lib/data";
+import {
+  AlertIcon,
+  BulbIcon,
+  CalendarIcon,
+  ChatIcon,
+  ClockIcon,
+  GlobeIcon,
+  MailIcon,
+  PhoneIcon,
+  PinIcon,
+  ServiceIcon,
+} from "./icons";
 
 function SectionTitle({ title, sub }: { title: string; sub?: string }) {
   return (
@@ -47,22 +59,22 @@ export default function HomePage() {
           <div className="mt-5 flex flex-wrap gap-3">
             <Link
               href="/book"
-              className="btn-primary shadow"
+              className="btn-primary shadow inline-flex items-center gap-1.5"
             >
-              📅 Book Appointment
+              <CalendarIcon className="h-4 w-4" /> Book Appointment
             </Link>
             <a
               href={`tel:${HOSPITAL.phoneHref}`}
-              className="btn-secondary shadow"
+              className="btn-secondary shadow inline-flex items-center gap-1.5"
             >
-              ☎ {HOSPITAL.phoneDisplay}
+              <PhoneIcon className="h-4 w-4" /> {HOSPITAL.phoneDisplay}
             </a>
           </div>
           <div className="mt-5 flex flex-wrap gap-2 text-xs font-semibold">
             <span className="rounded-full bg-white/15 px-3 py-1">✓ 1,000+ surgeries</span>
             <span className="rounded-full bg-white/15 px-3 py-1">✓ In-house lab &amp; pharmacy</span>
             <span className="rounded-full bg-white/15 px-3 py-1">✓ MD / MS specialists</span>
-            <span className="rounded-full bg-white/15 px-3 py-1">🚨 24×7 Emergency</span>
+            <span className="inline-flex items-center gap-1 rounded-full bg-white/15 px-3 py-1"><AlertIcon className="h-3.5 w-3.5" /> 24×7 Emergency</span>
           </div>
         </div>
       </section>
@@ -91,7 +103,7 @@ export default function HomePage() {
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {SERVICES.map((s) => (
             <div key={s.title} className="rounded-2xl border border-brand-line p-5">
-              <p className="text-3xl">{s.icon}</p>
+              <ServiceIcon name={s.icon} className="h-8 w-8 text-brand-darkred" />
               <h3 className="mt-3 font-bold text-brand-ink">{s.title}</h3>
               <p className="mt-1 text-sm text-brand-muted">{s.desc}</p>
             </div>
@@ -140,14 +152,14 @@ export default function HomePage() {
               </div>
               <p className="mt-3 text-xs font-semibold text-brand-muted">● {d.opd}</p>
               <div className="mt-4 flex gap-2">
-                <Link href="/book" className="btn-primary">📅 Book Appointment</Link>
+                <Link href="/book" className="btn-primary inline-flex items-center gap-1.5"><CalendarIcon className="h-4 w-4" /> Book Appointment</Link>
                 <a
                   href={`https://wa.me/918797303540?text=${encodeURIComponent(`Namaste, mujhe ${d.name} se milna hai`)}`}
                   target="_blank"
                   rel="noreferrer"
-                  className="btn-secondary"
+                  className="btn-secondary inline-flex items-center gap-1.5"
                 >
-                  💬 WhatsApp
+                  <ChatIcon className="h-4 w-4" /> WhatsApp
                 </a>
               </div>
             </article>
@@ -180,9 +192,9 @@ export default function HomePage() {
             href={HOSPITAL.whatsappHref}
             target="_blank"
             rel="noreferrer"
-            className="inline-block btn-secondary"
+            className="inline-flex items-center gap-1.5 btn-secondary"
           >
-            💬 WhatsApp par test book karein
+            <ChatIcon className="h-4 w-4" /> WhatsApp par test book karein
           </a>
         </div>
       </section>
@@ -230,25 +242,25 @@ export default function HomePage() {
         <SectionTitle title="Hospital aayein" />
         <div className="mt-8 grid gap-4 lg:grid-cols-2">
           <div className="rounded-2xl border border-brand-line p-6">
-            <p className="font-bold">📍 {HOSPITAL.name}</p>
+            <p className="font-bold"><PinIcon className="mr-1 inline h-4 w-4 align-middle" /> {HOSPITAL.name}</p>
             {HOSPITAL.addressLines.map((l) => (
               <p key={l} className="text-sm text-brand-muted">{l}</p>
             ))}
-            <p className="mt-4 text-sm">☎ <a href={`tel:${HOSPITAL.phoneHref}`} className="font-bold text-brand-red">{HOSPITAL.phoneDisplay}</a> — Emergency aur appointment, 24×7</p>
-            <p className="mt-1 text-sm">☎ <a href={`tel:${HOSPITAL.phoneAltHref}`} className="font-bold text-brand-red">{HOSPITAL.phoneAltDisplay}</a> — Appointments</p>
-            <p className="mt-1 text-sm">✉ {HOSPITAL.email}</p>
-            <p className="mt-1 text-sm">🌐 {HOSPITAL.website}</p>
+            <p className="mt-4 text-sm"><PhoneIcon className="mr-1 inline h-4 w-4 align-middle" /> <a href={`tel:${HOSPITAL.phoneHref}`} className="font-bold text-brand-red">{HOSPITAL.phoneDisplay}</a> — Emergency aur appointment, 24×7</p>
+            <p className="mt-1 text-sm"><PhoneIcon className="mr-1 inline h-4 w-4 align-middle" /> <a href={`tel:${HOSPITAL.phoneAltHref}`} className="font-bold text-brand-red">{HOSPITAL.phoneAltDisplay}</a> — Appointments</p>
+            <p className="mt-1 text-sm"><MailIcon className="mr-1 inline h-4 w-4 align-middle" /> {HOSPITAL.email}</p>
+            <p className="mt-1 text-sm"><GlobeIcon className="mr-1 inline h-4 w-4 align-middle" /> {HOSPITAL.website}</p>
             <div className="mt-5 flex flex-wrap gap-2">
-              <Link href="/book" className="btn-primary">📅 Book Appointment</Link>
-              <a href={HOSPITAL.whatsappHref} target="_blank" rel="noreferrer" className="btn-secondary">💬 WhatsApp karein</a>
+              <Link href="/book" className="btn-primary inline-flex items-center gap-1.5"><CalendarIcon className="h-4 w-4" /> Book Appointment</Link>
+              <a href={HOSPITAL.whatsappHref} target="_blank" rel="noreferrer" className="btn-secondary inline-flex items-center gap-1.5"><ChatIcon className="h-4 w-4" /> WhatsApp karein</a>
             </div>
             <p className="mt-5 rounded-xl bg-amber-50 p-4 text-sm">
-              💡 <b>Tip:</b> Bheed se bachne ke liye aane se pehle online token
+              <BulbIcon className="mr-1 inline h-4 w-4 align-middle" /> <b>Tip:</b> Bheed se bachne ke liye aane se pehle online token
               book kar lein — aapka number aate hi doctor se mulaqat ho jayegi.
             </p>
           </div>
           <div className="rounded-2xl border border-brand-line p-6">
-            <p className="font-bold">⏰ Timings</p>
+            <p className="font-bold"><ClockIcon className="mr-1 inline h-4 w-4 align-middle" /> Timings</p>
             <ul className="mt-3 space-y-2 text-sm">
               {TIMINGS.map((t) => (
                 <li key={t.label} className="flex justify-between gap-4 border-b border-brand-line pb-2">
@@ -258,7 +270,7 @@ export default function HomePage() {
               ))}
             </ul>
             <p className="mt-5 rounded-xl bg-red-50 p-4 text-sm">
-              🚑 <b>Emergency me kya karein?</b> Booking ka wait na karein.
+              <AlertIcon className="mr-1 inline h-4 w-4 align-middle" /> <b>Emergency me kya karein?</b> Booking ka wait na karein.
               Turant <a href={`tel:${HOSPITAL.phoneHref}`} className="font-bold text-brand-red">{HOSPITAL.phoneDisplay}</a> par
               call karke hospital ko batayein aur seedha Navin Nagar hospital
               pahunchein — team taiyaar milegi.
