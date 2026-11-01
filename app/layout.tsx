@@ -15,7 +15,7 @@ function NavLink({ href, children }: { href: string; children: React.ReactNode }
   return (
     <Link
       href={href}
-      className="rounded-lg px-3 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100"
+      className="rounded-lg px-3 py-2 text-sm font-semibold text-brand-muted hover:bg-brand-surface"
     >
       {children}
     </Link>
@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
-        <header className="sticky top-0 z-40 border-b border-brand-line bg-white/95 backdrop-blur">
+        <header className="sticky top-0 z-40 border-b border-brand-line bg-brand-midnight/95 backdrop-blur">
           <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3">
             <Link href="/" className="flex items-center gap-3">
               <LogoMark className="h-12 w-12 shrink-0" />
@@ -45,7 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <NavLink href="/dashboard">Dashboard</NavLink>
               <a
                 href={`tel:${HOSPITAL.phoneHref}`}
-                className="ml-1 hidden items-center gap-1.5 rounded-lg bg-brand-ink px-3 py-2 text-sm font-bold text-white sm:inline-flex"
+                className="ml-1 hidden items-center gap-1.5 rounded-lg bg-brand-electric px-3 py-2 text-sm font-bold text-white sm:inline-flex"
               >
                 <PhoneIcon className="h-4 w-4" /> Call
               </a>
@@ -55,7 +55,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         <main>{children}</main>
 
-        <footer className="border-t border-brand-line bg-gray-50">
+        <footer className="border-t border-brand-line bg-brand-midnight">
           <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:grid-cols-3">
             <div>
               <p className="flex items-center gap-2 text-base font-extrabold"><LogoMark className="h-12 w-12 shrink-0" /> Doctors Divine</p>
@@ -68,11 +68,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div>
               <p className="text-sm font-bold">Quick Links</p>
               <ul className="mt-2 space-y-1 text-sm">
-                <li><Link href="/book" className="text-brand-red hover:underline">Book Appointment</Link></li>
-                <li><Link href="/#services" className="text-brand-red hover:underline">Services</Link></li>
-                <li><Link href="/#doctors" className="text-brand-red hover:underline">Our Doctors</Link></li>
-                <li><Link href="/#faqs" className="text-brand-red hover:underline">FAQs</Link></li>
-                <li><Link href="/#visit" className="text-brand-red hover:underline">Contact</Link></li>
+                <li><Link href="/book" className="text-brand-electric hover:underline">Book Appointment</Link></li>
+                <li><Link href="/#services" className="text-brand-electric hover:underline">Services</Link></li>
+                <li><Link href="/#doctors" className="text-brand-electric hover:underline">Our Doctors</Link></li>
+                <li><Link href="/#faqs" className="text-brand-electric hover:underline">FAQs</Link></li>
+                <li><Link href="/#visit" className="text-brand-electric hover:underline">Contact</Link></li>
               </ul>
             </div>
             <div>
@@ -92,10 +92,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </footer>
 
         {/* Mobile sticky Call / WhatsApp / Book bar */}
-        <div className="fixed inset-x-0 bottom-0 z-40 flex border-t border-brand-line bg-white sm:hidden">
+        <div className="fixed inset-x-0 bottom-0 z-40 flex border-t border-brand-line bg-brand-surface sm:hidden">
           <a href={`tel:${HOSPITAL.phoneHref}`} className="flex-1 inline-flex items-center justify-center gap-1 py-3 text-center text-sm font-bold"><PhoneIcon className="h-4 w-4" /> Call</a>
-          <a href={HOSPITAL.whatsappHref} target="_blank" rel="noreferrer" className="flex-1 inline-flex items-center justify-center gap-1 border-x border-brand-line py-3 text-center text-sm font-bold text-green-700"><ChatIcon className="h-4 w-4" /> WhatsApp</a>
-          <Link href="/book" className="flex-1 bg-brand-darkred py-3 text-center text-sm font-bold text-white">Book Appointment</Link>
+          <a href={HOSPITAL.whatsappHref} target="_blank" rel="noreferrer" className="flex-1 inline-flex items-center justify-center gap-1 border-x border-brand-line py-3 text-center text-sm font-bold text-brand-electric"><ChatIcon className="h-4 w-4" /> WhatsApp</a>
+          <Link href="/book" className="flex-1 bg-brand-electricdark py-3 text-center text-sm font-bold text-white">Book Appointment</Link>
         </div>
         {/* Spacer so the sticky bar never covers footer content on mobile */}
         <div className="h-12 sm:hidden" />

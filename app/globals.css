@@ -5,11 +5,11 @@
 @layer components {
   /* One shared primary button — Book Appointment and form submits. */
   .btn-primary {
-    @apply rounded-xl bg-brand-red px-5 py-3 text-sm font-bold text-white shadow hover:bg-brand-darkred disabled:opacity-60;
+    @apply rounded-xl bg-brand-electric px-5 py-3 text-sm font-bold text-white shadow hover:bg-brand-electricdark disabled:opacity-60;
   }
   /* One shared secondary button — call / WhatsApp / outline actions. */
   .btn-secondary {
-    @apply rounded-xl border border-brand-line bg-white px-5 py-3 text-sm font-bold text-brand-ink hover:bg-brand-bg;
+    @apply rounded-xl border border-brand-line bg-brand-surface px-5 py-3 text-sm font-bold text-brand-ink hover:bg-brand-line;
   }
 }
 
@@ -18,8 +18,8 @@ html {
 }
 
 body {
-  background: #ffffff;
-  color: #111827;
+  background: #02070a;
+  color: #ffffff;
   font-family: ui-sans-system, system-ui, -apple-system, "Segoe UI", Roboto,
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -27,21 +27,21 @@ body {
 
 /* Browser surfaces, themed from the palette (not left as defaults). */
 :focus-visible {
-  outline: 2px solid #b91c1c;
+  outline: 2px solid #0287de;
   outline-offset: 2px;
 }
 
 ::selection {
-  background: rgba(185, 28, 28, 0.16);
+  background: rgba(2, 135, 222, 0.28);
 }
 
 input,
 textarea {
-  caret-color: #b91c1c;
+  caret-color: #0287de;
 }
 
 ::placeholder {
-  color: #6b7280;
+  color: #9aa7b4;
   opacity: 1;
 }
 

@@ -51,7 +51,7 @@ export default function HomePage() {
           <h1 className="max-w-2xl text-3xl font-extrabold leading-tight sm:text-5xl">
             Trusted care for every village of Nawada
           </h1>
-          <p className="mt-3 max-w-xl text-sm text-gray-200 sm:text-base">
+          <p className="mt-3 max-w-xl text-sm text-brand-muted sm:text-base">
             Surgery, maternity and 24×7 emergency care — no need to go to Patna
             anymore. Book an appointment online in just 30 seconds — choose a
             doctor, choose a time slot, get your token number instantly.
@@ -71,10 +71,10 @@ export default function HomePage() {
             </a>
           </div>
           <div className="mt-5 flex flex-wrap gap-2 text-xs font-semibold">
-            <span className="rounded-full bg-white/15 px-3 py-1">✓ 1,000+ surgeries</span>
-            <span className="rounded-full bg-white/15 px-3 py-1">✓ In-house lab &amp; pharmacy</span>
-            <span className="rounded-full bg-white/15 px-3 py-1">✓ MD / MS specialists</span>
-            <span className="inline-flex items-center gap-1 rounded-full bg-white/15 px-3 py-1"><AlertIcon className="h-3.5 w-3.5" /> 24×7 Emergency</span>
+            <span className="rounded-full bg-brand-surface/15 px-3 py-1">✓ 1,000+ surgeries</span>
+            <span className="rounded-full bg-brand-surface/15 px-3 py-1">✓ In-house lab &amp; pharmacy</span>
+            <span className="rounded-full bg-brand-surface/15 px-3 py-1">✓ MD / MS specialists</span>
+            <span className="inline-flex items-center gap-1 rounded-full bg-brand-surface/15 px-3 py-1"><AlertIcon className="h-3.5 w-3.5" /> 24×7 Emergency</span>
           </div>
         </div>
       </section>
@@ -87,8 +87,8 @@ export default function HomePage() {
           ["10+", "Beds including ICU care"],
           ["2020", "Serving Nawada since"],
         ].map(([big, small]) => (
-          <div key={small} className="rounded-2xl border border-brand-line bg-brand-bg p-5">
-            <p className="text-2xl font-extrabold text-brand-darkred">{big}</p>
+          <div key={small} className="rounded-2xl border border-brand-line bg-brand-midnight p-5">
+            <p className="text-2xl font-extrabold text-brand-electricdark">{big}</p>
             <p className="mt-1 text-xs font-semibold text-brand-muted">{small}</p>
           </div>
         ))}
@@ -103,7 +103,7 @@ export default function HomePage() {
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {SERVICES.map((s) => (
             <div key={s.title} className="rounded-2xl border border-brand-line p-5">
-              <ServiceIcon name={s.icon} className="h-8 w-8 text-brand-darkred" />
+              <ServiceIcon name={s.icon} className="h-8 w-8 text-brand-electricdark" />
               <h3 className="mt-3 font-bold text-brand-ink">{s.title}</h3>
               <p className="mt-1 text-sm text-brand-muted">{s.desc}</p>
             </div>
@@ -119,7 +119,7 @@ export default function HomePage() {
         />
         <div className="mt-8 grid gap-4 lg:grid-cols-3">
           {CENTRES.map((c) => (
-            <div key={c.title} className="rounded-2xl border border-brand-line bg-brand-bg p-6">
+            <div key={c.title} className="rounded-2xl border border-brand-line bg-brand-midnight p-6">
               <h3 className="font-bold text-brand-ink">{c.title}</h3>
               <p className="mt-2 text-sm text-brand-muted">{c.desc}</p>
               <ul className="mt-3 space-y-1 text-sm">
@@ -142,12 +142,12 @@ export default function HomePage() {
           {DOCTORS.map((d) => (
             <article key={d.name} className="rounded-2xl border border-brand-line p-6">
               <h3 className="text-lg font-extrabold">{d.name}</h3>
-              <p className="text-sm font-semibold text-brand-red">{d.title}</p>
+              <p className="text-sm font-semibold text-brand-electric">{d.title}</p>
               <p className="mt-1 text-xs text-brand-muted">{d.tagline}</p>
               <p className="mt-3 text-sm text-brand-muted">{d.bio}</p>
               <div className="mt-3 flex flex-wrap gap-2">
                 {d.specialties.map((s) => (
-                  <span key={s} className="rounded-full bg-gray-100 px-3 py-1 text-xs font-semibold">{s}</span>
+                  <span key={s} className="rounded-full bg-brand-surface px-3 py-1 text-xs font-semibold">{s}</span>
                 ))}
               </div>
               <p className="mt-3 text-xs font-semibold text-brand-muted">● {d.opd}</p>
@@ -168,7 +168,7 @@ export default function HomePage() {
         <p className="mt-4 text-center text-sm text-brand-muted">
           Could not find a doctor? Call the hospital and we will connect you
           with the right specialist:{" "}
-          <a href={`tel:${HOSPITAL.phoneHref}`} className="font-bold text-brand-red">{HOSPITAL.phoneDisplay}</a>
+          <a href={`tel:${HOSPITAL.phoneHref}`} className="font-bold text-brand-electric">{HOSPITAL.phoneDisplay}</a>
         </p>
       </section>
 
@@ -183,7 +183,7 @@ export default function HomePage() {
             <div key={t.name} className="rounded-2xl border border-brand-line p-5">
               <p className="font-bold text-brand-ink">{t.name}</p>
               <p className="mt-1 text-sm text-brand-muted">{t.desc}</p>
-              <p className="mt-2 text-xs font-bold text-brand-red">{t.report}</p>
+              <p className="mt-2 text-xs font-bold text-brand-electric">{t.report}</p>
             </div>
           ))}
         </div>
@@ -214,7 +214,7 @@ export default function HomePage() {
               <figcaption className="flex items-center justify-between px-4 py-3 text-sm font-semibold">
                 <span>{g.caption}</span>
                 {!g.real && (
-                  <span className="rounded-full bg-gray-100 px-2 py-0.5 text-[11px] text-brand-muted">
+                  <span className="rounded-full bg-brand-surface px-2 py-0.5 text-[11px] text-brand-muted">
                     illustrative
                   </span>
                 )}
@@ -246,15 +246,15 @@ export default function HomePage() {
             {HOSPITAL.addressLines.map((l) => (
               <p key={l} className="text-sm text-brand-muted">{l}</p>
             ))}
-            <p className="mt-4 text-sm"><PhoneIcon className="mr-1 inline h-4 w-4 align-middle" /> <a href={`tel:${HOSPITAL.phoneHref}`} className="font-bold text-brand-red">{HOSPITAL.phoneDisplay}</a> — Emergency and appointments, 24×7</p>
-            <p className="mt-1 text-sm"><PhoneIcon className="mr-1 inline h-4 w-4 align-middle" /> <a href={`tel:${HOSPITAL.phoneAltHref}`} className="font-bold text-brand-red">{HOSPITAL.phoneAltDisplay}</a> — Appointments</p>
+            <p className="mt-4 text-sm"><PhoneIcon className="mr-1 inline h-4 w-4 align-middle" /> <a href={`tel:${HOSPITAL.phoneHref}`} className="font-bold text-brand-electric">{HOSPITAL.phoneDisplay}</a> — Emergency and appointments, 24×7</p>
+            <p className="mt-1 text-sm"><PhoneIcon className="mr-1 inline h-4 w-4 align-middle" /> <a href={`tel:${HOSPITAL.phoneAltHref}`} className="font-bold text-brand-electric">{HOSPITAL.phoneAltDisplay}</a> — Appointments</p>
             <p className="mt-1 text-sm"><MailIcon className="mr-1 inline h-4 w-4 align-middle" /> {HOSPITAL.email}</p>
             <p className="mt-1 text-sm"><GlobeIcon className="mr-1 inline h-4 w-4 align-middle" /> {HOSPITAL.website}</p>
             <div className="mt-5 flex flex-wrap gap-2">
               <Link href="/book" className="btn-primary inline-flex items-center gap-1.5"><CalendarIcon className="h-4 w-4" /> Book Appointment</Link>
               <a href={HOSPITAL.whatsappHref} target="_blank" rel="noreferrer" className="btn-secondary inline-flex items-center gap-1.5"><ChatIcon className="h-4 w-4" /> WhatsApp us</a>
             </div>
-            <p className="mt-5 rounded-xl bg-amber-50 p-4 text-sm">
+            <p className="mt-5 rounded-xl bg-brand-surface p-4 text-sm">
               <BulbIcon className="mr-1 inline h-4 w-4 align-middle" /> <b>Tip:</b> To avoid the crowd, book an online token
               before coming — you will meet the doctor as soon as your number comes.
             </p>
@@ -269,9 +269,9 @@ export default function HomePage() {
                 </li>
               ))}
             </ul>
-            <p className="mt-5 rounded-xl bg-red-50 p-4 text-sm">
+            <p className="mt-5 rounded-xl bg-brand-surface p-4 text-sm">
               <AlertIcon className="mr-1 inline h-4 w-4 align-middle" /> <b>What to do in an emergency?</b> Do not wait for a booking.
-              Call <a href={`tel:${HOSPITAL.phoneHref}`} className="font-bold text-brand-red">{HOSPITAL.phoneDisplay}</a> immediately to
+              Call <a href={`tel:${HOSPITAL.phoneHref}`} className="font-bold text-brand-electric">{HOSPITAL.phoneDisplay}</a> immediately to
               inform the hospital and come straight to the Navin Nagar hospital
               — the team will be ready.
             </p>

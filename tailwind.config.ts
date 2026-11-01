@@ -8,12 +8,15 @@ module.exports = {
     extend: {
       colors: {
         brand: {
-          red: "#B91C1C",
-          darkred: "#7F1D1D",
-          ink: "#111827",
-          muted: "#6B7280",
-          line: "#E5E7EB",
-          bg: "#F9FAFB",
+          // Photo combo only: Midnight Black, Electric Blue, Cantaloupe Orange.
+          midnight: "#02070A",
+          surface: "#0A1017",
+          electric: "#0287DE",
+          electricdark: "#0268AC",
+          cantaloupe: "#FC734D",
+          ink: "#FFFFFF",
+          muted: "#9AA7B4",
+          line: "#1E2836",
         },
       },
     },

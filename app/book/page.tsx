@@ -85,14 +85,14 @@ export default function BookPage() {
     );
     return (
       <div className="mx-auto max-w-xl px-4 py-16 text-center">
-        <CheckIcon className="mx-auto h-12 w-12 text-green-600" />
+        <CheckIcon className="mx-auto h-12 w-12 text-brand-electric" />
         <h1 className="mt-4 text-2xl font-extrabold">Booking confirmed!</h1>
         <p className="mt-2 text-sm text-brand-muted">
           Show this token number at the reception when you visit the hospital.
         </p>
-        <div className="mx-auto mt-6 max-w-sm rounded-2xl border border-brand-line bg-brand-bg p-6">
+        <div className="mx-auto mt-6 max-w-sm rounded-2xl border border-brand-line bg-brand-midnight p-6">
           <p className="text-xs font-bold uppercase tracking-widest text-brand-muted">Your Token Number</p>
-          <p className="tnum mt-1 text-4xl font-extrabold text-brand-darkred">{done.token}</p>
+          <p className="tnum mt-1 text-4xl font-extrabold text-brand-electricdark">{done.token}</p>
           <p className="mt-3 text-sm">
             {done.patientName} · {done.doctor}
           </p>
@@ -123,7 +123,7 @@ export default function BookPage() {
             setArea("");
             setProblem("");
           }}
-          className="mt-6 text-sm font-bold text-brand-red hover:underline"
+          className="mt-6 text-sm font-bold text-brand-electric hover:underline"
         >
           Book another appointment
         </button>
@@ -143,8 +143,8 @@ export default function BookPage() {
       aria-pressed={slot === s}
       className={`rounded-lg px-3 py-2 text-sm font-bold ${
         slot === s
-          ? "bg-brand-darkred text-white"
-          : "bg-gray-100 text-brand-ink hover:bg-gray-200"
+          ? "bg-brand-electricdark text-white"
+          : "bg-brand-surface text-brand-ink hover:bg-brand-line"
       }`}
     >
       {s}
@@ -170,7 +170,7 @@ export default function BookPage() {
                 onClick={() => setDoctor(d)}
                 aria-pressed={doctor === d}
                 className={`rounded-lg px-3 py-2 text-sm font-bold ${
-                  doctor === d ? "bg-brand-darkred text-white" : "bg-gray-100 text-brand-ink"
+                  doctor === d ? "bg-brand-electricdark text-white" : "bg-brand-surface text-brand-ink"
                 }`}
               >
                 {d === "Other" ? "Other / Not sure" : d}
@@ -236,7 +236,7 @@ export default function BookPage() {
         </div>
 
         {error && (
-          <p className="rounded-lg bg-red-50 px-3 py-2 text-sm font-semibold text-red-700">{error}</p>
+          <p className="rounded-lg bg-brand-surface px-3 py-2 text-sm font-semibold text-brand-cantaloupe">{error}</p>
         )}
 
         <button
@@ -250,11 +250,11 @@ export default function BookPage() {
 
       <p className="mt-4 text-center text-sm text-brand-muted">
         Need help? Call{" "}
-        <a href={`tel:${HOSPITAL.phoneHref}`} className="font-bold text-brand-red">{HOSPITAL.phoneDisplay}</a>{" "}
+        <a href={`tel:${HOSPITAL.phoneHref}`} className="font-bold text-brand-electric">{HOSPITAL.phoneDisplay}</a>{" "}
         or message us on WhatsApp.
       </p>
       <p className="mt-2 text-center text-sm">
-        <Link href="/" className="font-bold text-brand-red hover:underline">← Back to the hospital website</Link>
+        <Link href="/" className="font-bold text-brand-electric hover:underline">← Back to the hospital website</Link>
       </p>
     </div>
   );

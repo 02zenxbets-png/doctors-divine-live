@@ -207,7 +207,7 @@ export default function DashboardPage() {
         <p className="mt-3 text-sm text-brand-muted">
           The dashboard admin password has not been set yet. Follow the steps
           in the README to create an{" "}
-          <code className="bg-gray-100 px-1">ADMIN_PASSWORD_HASH</code>{" "}
+          <code className="bg-brand-surface px-1">ADMIN_PASSWORD_HASH</code>{" "}
           and set it as an env var in Vercel, then open this page again.
         </p>
       </div>
@@ -233,7 +233,7 @@ export default function DashboardPage() {
             required
           />
           {unlockError && (
-            <p className="rounded-lg bg-red-50 px-3 py-2 text-sm font-semibold text-red-700">{unlockError}</p>
+            <p className="rounded-lg bg-brand-surface px-3 py-2 text-sm font-semibold text-brand-cantaloupe">{unlockError}</p>
           )}
           <button
             type="submit"
@@ -243,7 +243,7 @@ export default function DashboardPage() {
             {unlocking ? "Checking…" : "Unlock bookings"}
           </button>
         </form>
-        <p className="mt-4 rounded-xl bg-amber-50 p-4 text-xs text-amber-800">
+        <p className="mt-4 rounded-xl bg-brand-surface p-4 text-xs text-brand-cantaloupe">
           <AlertIcon className="mr-1 inline h-4 w-4 align-middle" /> There is no password recovery/reset — if you forget it, bookings
           will not open from this dashboard. Write the password down somewhere
           safe; to reset it, change ADMIN_PASSWORD_HASH in Vercel (see README).
@@ -259,37 +259,37 @@ export default function DashboardPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-8">
       {/* LIVE bar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-gray-900 px-4 py-3 text-white">
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-brand-midnight px-4 py-3 text-white">
         <p className="flex items-center gap-2 text-sm font-bold">
           <span className="relative flex h-2.5 w-2.5">
-            <span className={`absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 ${paused ? "hidden" : "opacity-75"}`} />
-            <span className={`relative inline-flex h-2.5 w-2.5 rounded-full ${paused ? "bg-gray-400" : "bg-green-500"}`} />
+            <span className={`absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-electric ${paused ? "hidden" : "opacity-75"}`} />
+            <span className={`relative inline-flex h-2.5 w-2.5 rounded-full ${paused ? "bg-brand-muted" : "bg-brand-electric"}`} />
           </span>
           {paused ? "LIVE paused" : "LIVE"}
-          <span className="font-normal text-gray-300">
+          <span className="font-normal text-brand-muted">
             · Last updated {ago === null ? "…" : ago === 0 ? "just now" : `${ago}s ago`} · auto-refresh every 5 sec
           </span>
         </p>
         <div className="flex gap-2">
-          <button onClick={load} className="rounded-lg bg-white px-3 py-1.5 text-xs font-bold text-gray-900">Refresh now</button>
+          <button onClick={load} className="rounded-lg bg-brand-surface px-3 py-1.5 text-xs font-bold text-brand-ink">Refresh now</button>
           <button
             onClick={() => setPaused((p) => !p)}
-            className="rounded-lg bg-gray-700 px-3 py-1.5 text-xs font-bold text-white"
+            className="rounded-lg bg-brand-surface px-3 py-1.5 text-xs font-bold text-white"
           >
             {paused ? "Resume live" : "Pause live"}
           </button>
-          <button onClick={lockNow} className="rounded-lg bg-brand-red px-3 py-1.5 text-xs font-bold text-white">
+          <button onClick={lockNow} className="rounded-lg bg-brand-electric px-3 py-1.5 text-xs font-bold text-white">
             Lock now
           </button>
         </div>
       </div>
 
       {banner && (
-        <div className="mt-4 flex items-start justify-between gap-3 rounded-2xl bg-green-50 px-4 py-3">
-          <p className="text-sm font-semibold text-green-800">
-            <span className="mr-1 inline-block h-2.5 w-2.5 rounded-full bg-green-500 align-middle" /> New booking just arrived — {banner.patient_name}, token {banner.token}, {banner.date} · {banner.time_slot}
+        <div className="mt-4 flex items-start justify-between gap-3 rounded-2xl bg-brand-surface px-4 py-3">
+          <p className="text-sm font-semibold text-brand-electric">
+            <span className="mr-1 inline-block h-2.5 w-2.5 rounded-full bg-brand-electric align-middle" /> New booking just arrived — {banner.patient_name}, token {banner.token}, {banner.date} · {banner.time_slot}
           </p>
-          <button onClick={() => setBanner(null)} className="text-sm font-bold text-green-800">✕</button>
+          <button onClick={() => setBanner(null)} className="text-sm font-bold text-brand-electric">✕</button>
         </div>
       )}
 
@@ -301,7 +301,7 @@ export default function DashboardPage() {
           ["Pending", counts.pending],
           ["Total", counts.total],
         ] as const).map(([label, value]) => (
-          <div key={label} className="rounded-2xl border border-brand-line bg-brand-bg p-4">
+          <div key={label} className="rounded-2xl border border-brand-line bg-brand-midnight p-4">
             <p className="text-2xl font-extrabold">{value}</p>
             <p className="text-xs font-semibold text-brand-muted">{label}</p>
           </div>
@@ -310,12 +310,12 @@ export default function DashboardPage() {
 
       {/* Filters */}
       <div className="mt-6 flex flex-wrap gap-2">
-        <div className="flex rounded-lg bg-gray-100 p-1">
+        <div className="flex rounded-lg bg-brand-surface p-1">
           {(["today", "all"] as const).map((s) => (
             <button
               key={s}
               onClick={() => setScope(s)}
-              className={`rounded-md px-3 py-1.5 text-sm font-bold ${scope === s ? "bg-gray-900 text-white" : "text-gray-700"}`}
+              className={`rounded-md px-3 py-1.5 text-sm font-bold ${scope === s ? "bg-brand-midnight text-white" : "text-brand-muted"}`}
             >
               {s === "today" ? "Today" : "All"}
             </button>
@@ -341,7 +341,7 @@ export default function DashboardPage() {
       </div>
 
       {loadError && (
-        <p className="mt-4 rounded-lg bg-red-50 px-3 py-2 text-sm font-semibold text-red-700">{loadError}</p>
+        <p className="mt-4 rounded-lg bg-brand-surface px-3 py-2 text-sm font-semibold text-brand-cantaloupe">{loadError}</p>
       )}
 
       {/* List */}
@@ -358,11 +358,11 @@ export default function DashboardPage() {
                 <p className="font-bold">
                   {b.patient_name}
                   {newIds.has(b.id) && (
-                    <span className="ml-2 rounded-full bg-green-600 px-2 py-0.5 text-[11px] font-bold text-white">NEW</span>
+                    <span className="ml-2 rounded-full bg-brand-electric px-2 py-0.5 text-[11px] font-bold text-white">NEW</span>
                   )}
                 </p>
                 <p className="text-sm text-brand-muted">
-                  Token <b className="tnum text-brand-darkred">{b.token}</b> · {b.doctor} · {b.date} · {b.time_slot}
+                  Token <b className="tnum text-brand-electricdark">{b.token}</b> · {b.doctor} · {b.date} · {b.time_slot}
                 </p>
                 <p className="text-sm text-brand-muted">
                   <PhoneIcon className="mr-1 inline h-4 w-4 align-middle" /> {b.mobile}
@@ -373,23 +373,23 @@ export default function DashboardPage() {
                 <p className="mt-1 text-xs">
                   Status: <b>{STATUS_LABEL[b.status] ?? b.status}</b> · Email:{" "}
                   <b>{EMAIL_LABEL[b.email_status] ?? b.email_status}</b>
-                  {b.email_error && <span className="text-red-600"> ({b.email_error})</span>}
+                  {b.email_error && <span className="text-brand-cantaloupe"> ({b.email_error})</span>}
                 </p>
               </div>
               <div className="flex flex-wrap gap-2">
                 {b.status !== "confirmed" && (
-                  <button onClick={() => act(b.id, "status", "confirmed")} className="rounded-lg bg-white px-3 py-1.5 text-xs font-bold text-brand-ink ring-1 ring-inset ring-brand-line hover:bg-brand-bg">Confirm</button>
+                  <button onClick={() => act(b.id, "status", "confirmed")} className="rounded-lg bg-brand-surface px-3 py-1.5 text-xs font-bold text-brand-ink ring-1 ring-inset ring-brand-line hover:bg-brand-midnight">Confirm</button>
                 )}
                 {b.status !== "done" && (
-                  <button onClick={() => act(b.id, "status", "done")} className="rounded-lg bg-white px-3 py-1.5 text-xs font-bold text-brand-ink ring-1 ring-inset ring-brand-line hover:bg-brand-bg">Mark done</button>
+                  <button onClick={() => act(b.id, "status", "done")} className="rounded-lg bg-brand-surface px-3 py-1.5 text-xs font-bold text-brand-ink ring-1 ring-inset ring-brand-line hover:bg-brand-midnight">Mark done</button>
                 )}
                 {b.status !== "cancelled" && (
-                  <button onClick={() => act(b.id, "status", "cancelled")} className="rounded-lg bg-white px-3 py-1.5 text-xs font-bold text-brand-ink ring-1 ring-inset ring-brand-line hover:bg-brand-bg">Cancel</button>
+                  <button onClick={() => act(b.id, "status", "cancelled")} className="rounded-lg bg-brand-surface px-3 py-1.5 text-xs font-bold text-brand-ink ring-1 ring-inset ring-brand-line hover:bg-brand-midnight">Cancel</button>
                 )}
                 {b.email_status === "failed" && (
-                  <button onClick={() => act(b.id, "retry")} className="rounded-lg bg-amber-600 px-3 py-1.5 text-xs font-bold text-white">Retry email</button>
+                  <button onClick={() => act(b.id, "retry")} className="rounded-lg bg-brand-cantaloupe px-3 py-1.5 text-xs font-bold text-white">Retry email</button>
                 )}
-                <button onClick={() => act(b.id, "delete")} className="rounded-lg bg-red-700 px-3 py-1.5 text-xs font-bold text-white">Delete</button>
+                <button onClick={() => act(b.id, "delete")} className="rounded-lg bg-brand-cantaloupe px-3 py-1.5 text-xs font-bold text-white">Delete</button>
               </div>
             </div>
           </article>
@@ -431,7 +431,7 @@ export default function DashboardPage() {
             Save emails
           </button>
         </form>
-        {settingsMsg && <p className="mt-2 text-sm font-semibold text-green-700">{settingsMsg}</p>}
+        {settingsMsg && <p className="mt-2 text-sm font-semibold text-brand-electric">{settingsMsg}</p>}
       </section>
 
       {/* Admin password section */}
@@ -439,7 +439,7 @@ export default function DashboardPage() {
         <h2 className="font-extrabold">Admin password — Doctor only</h2>
         <p className="mt-1 text-sm text-brand-muted">
           The dashboard password is set via the{" "}
-          <code className="bg-gray-100 px-1">ADMIN_PASSWORD_HASH</code> env var
+          <code className="bg-brand-surface px-1">ADMIN_PASSWORD_HASH</code> env var
           in Vercel, not from this page. To change the password, create a new
           hash, update the env var in Vercel and redeploy (README: “Changing or
           forgetting the admin password”).
