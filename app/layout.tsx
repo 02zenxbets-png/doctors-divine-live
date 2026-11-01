@@ -58,7 +58,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <footer className="border-t border-brand-line bg-gray-50">
           <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:grid-cols-3">
             <div>
-              <p className="flex items-center gap-2 text-base font-extrabold"><LogoMark className="h-10 w-10 shrink-0" /> Doctors Divine</p>
+              <p className="flex items-center gap-2 text-base font-extrabold"><LogoMark className="h-12 w-12 shrink-0" /> Doctors Divine</p>
               <p className="mt-1 text-sm text-brand-muted">
                 Multispeciality Hospital — your health is our responsibility.
                 Serving Navin Nagar, Nawada — and every village around —
