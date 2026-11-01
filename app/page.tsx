@@ -48,7 +48,8 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10" />
         </div>
         <div className="absolute inset-x-0 bottom-0 mx-auto max-w-6xl px-4 pb-8 text-white">
-          <h1 className="max-w-2xl text-3xl font-extrabold leading-tight sm:text-5xl">
+          <p className="mb-4 inline-flex items-center rounded-full border border-white/10 bg-black/45 px-3 py-1 text-[11px] font-bold tracking-widest backdrop-blur">NAWADA · MULTISPECIALITY · 24×7 EMERGENCY</p>
+          <h1 className="max-w-2xl text-3xl font-extrabold leading-tight tracking-tight sm:text-5xl">
             Trusted care for every village of Nawada
           </h1>
           <p className="mt-3 max-w-xl text-sm text-brand-muted sm:text-base">
@@ -87,7 +88,7 @@ export default function HomePage() {
           ["10+", "Beds including ICU care"],
           ["2020", "Serving Nawada since"],
         ].map(([big, small]) => (
-          <div key={small} className="rounded-2xl border border-brand-line bg-brand-midnight p-5">
+          <div key={small} className="rounded-2xl border border-brand-line bg-brand-surface p-5">
             <p className="text-2xl font-extrabold text-brand-electric">{big}</p>
             <p className="mt-1 text-xs font-semibold text-brand-muted">{small}</p>
           </div>
@@ -102,7 +103,7 @@ export default function HomePage() {
         />
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {SERVICES.map((s) => (
-            <div key={s.title} className="rounded-2xl border border-brand-line p-5 transition-shadow hover:border-brand-electric/60 hover:shadow-lg hover:shadow-black/40">
+            <div key={s.title} className="rounded-2xl border border-brand-line bg-brand-surface p-5 transition-shadow hover:border-brand-electric/60 hover:shadow-lg hover:shadow-black/40">
               <ServiceIcon name={s.icon} className="h-8 w-8 text-brand-electricdark" />
               <h3 className="mt-3 font-bold text-brand-ink">{s.title}</h3>
               <p className="mt-1 text-sm text-brand-muted">{s.desc}</p>
@@ -119,7 +120,7 @@ export default function HomePage() {
         />
         <div className="mt-8 grid gap-4 lg:grid-cols-3">
           {CENTRES.map((c) => (
-            <div key={c.title} className="rounded-2xl border border-brand-line bg-brand-midnight p-6 transition-shadow hover:border-brand-electric/60 hover:shadow-lg hover:shadow-black/40">
+            <div key={c.title} className="rounded-2xl border border-brand-line bg-brand-surface p-6 transition-shadow hover:border-brand-electric/60 hover:shadow-lg hover:shadow-black/40">
               <h3 className="font-bold text-brand-ink">{c.title}</h3>
               <p className="mt-2 text-sm text-brand-muted">{c.desc}</p>
               <ul className="mt-3 space-y-1 text-sm">
@@ -140,7 +141,7 @@ export default function HomePage() {
         />
         <div className="mt-8 grid gap-4 md:grid-cols-2">
           {DOCTORS.map((d) => (
-            <article key={d.name} className="rounded-2xl border border-brand-line p-6 transition-shadow hover:border-brand-electric/60 hover:shadow-lg hover:shadow-black/40">
+            <article key={d.name} className="rounded-2xl border border-brand-line bg-brand-surface p-6 transition-shadow hover:border-brand-electric/60 hover:shadow-lg hover:shadow-black/40">
               <div className="flex items-center gap-3">
                 <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand-electric text-base font-extrabold text-white">
                   {d.name.replace("Dr. ", "").split(" ").map((w) => w[0]).slice(0, 2).join("")}
@@ -187,7 +188,7 @@ export default function HomePage() {
         />
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {LAB_TESTS.map((t) => (
-            <div key={t.name} className="rounded-2xl border border-brand-line p-5 transition-shadow hover:border-brand-electric/60 hover:shadow-lg hover:shadow-black/40">
+            <div key={t.name} className="rounded-2xl border border-brand-line bg-brand-surface p-5 transition-shadow hover:border-brand-electric/60 hover:shadow-lg hover:shadow-black/40">
               <p className="font-bold text-brand-ink">{t.name}</p>
               <p className="mt-1 text-sm text-brand-muted">{t.desc}</p>
               <p className="mt-2 text-xs font-bold text-brand-electric">{t.report}</p>
@@ -214,7 +215,7 @@ export default function HomePage() {
         />
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {GALLERY.map((g) => (
-            <figure key={g.src} className="overflow-hidden rounded-2xl border border-brand-line transition-shadow hover:border-brand-electric/60 hover:shadow-lg hover:shadow-black/40">
+            <figure key={g.src} className="overflow-hidden rounded-2xl border border-brand-line bg-brand-surface transition-shadow hover:border-brand-electric/60 hover:shadow-lg hover:shadow-black/40">
               <div className="relative h-52 w-full">
                 <Image src={g.src} alt={g.caption} fill className="object-cover" />
               </div>
@@ -248,7 +249,7 @@ export default function HomePage() {
       <section id="visit" className="mx-auto max-w-6xl px-4 pt-12 pb-16">
         <SectionTitle title="Visit Us" />
         <div className="mt-8 grid gap-4 lg:grid-cols-2">
-          <div className="rounded-2xl border border-brand-line p-6">
+          <div className="rounded-2xl border border-brand-line bg-brand-surface p-6">
             <p className="font-bold"><PinIcon className="mr-1 inline h-4 w-4 align-middle" /> {HOSPITAL.name}</p>
             {HOSPITAL.addressLines.map((l) => (
               <p key={l} className="text-sm text-brand-muted">{l}</p>
@@ -266,7 +267,7 @@ export default function HomePage() {
               before coming — you will meet the doctor as soon as your number comes.
             </p>
           </div>
-          <div className="rounded-2xl border border-brand-line p-6">
+          <div className="rounded-2xl border border-brand-line bg-brand-surface p-6">
             <p className="font-bold"><ClockIcon className="mr-1 inline h-4 w-4 align-middle" /> Timings</p>
             <ul className="mt-3 space-y-2 text-sm">
               {TIMINGS.map((t) => (

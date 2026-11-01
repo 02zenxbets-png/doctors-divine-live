@@ -352,7 +352,7 @@ export default function DashboardPage() {
           </p>
         )}
         {bookings.map((b) => (
-          <article key={b.id} className="rounded-2xl border border-brand-line p-4">
+          <article key={b.id} className="rounded-2xl border border-brand-line bg-brand-surface p-4">
             <div className="flex flex-wrap items-start justify-between gap-2">
               <div>
                 <p className="font-bold">
@@ -362,7 +362,7 @@ export default function DashboardPage() {
                   )}
                 </p>
                 <p className="text-sm text-brand-muted">
-                  Token <b className="tnum text-brand-electricdark">{b.token}</b> · {b.doctor} · {b.date} · {b.time_slot}
+                  Token <b className="tnum text-brand-electric">{b.token}</b> · {b.doctor} · {b.date} · {b.time_slot}
                 </p>
                 <p className="text-sm text-brand-muted">
                   <PhoneIcon className="mr-1 inline h-4 w-4 align-middle" /> {b.mobile}
@@ -370,10 +370,10 @@ export default function DashboardPage() {
                   {b.area ? ` · ${b.area}` : ""}
                   {b.problem ? ` · ${b.problem}` : ""}
                 </p>
-                <p className="mt-1 text-xs">
-                  Status: <b>{STATUS_LABEL[b.status] ?? b.status}</b> · Email:{" "}
-                  <b>{EMAIL_LABEL[b.email_status] ?? b.email_status}</b>
-                  {b.email_error && <span className="text-brand-cantaloupe"> ({b.email_error})</span>}
+                <p className="mt-2 flex flex-wrap items-center gap-1.5 text-xs">
+                  <span className="rounded-full border border-brand-line bg-brand-midnight px-2.5 py-0.5 font-bold">{STATUS_LABEL[b.status] ?? b.status}</span>
+                  <span className="rounded-full border border-brand-line bg-brand-midnight px-2.5 py-0.5 font-bold">Email: {EMAIL_LABEL[b.email_status] ?? b.email_status}</span>
+                  {b.email_error && <span className="text-brand-cantaloupe">({b.email_error})</span>}
                 </p>
               </div>
               <div className="flex flex-wrap gap-2">

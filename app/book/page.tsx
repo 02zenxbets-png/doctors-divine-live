@@ -143,7 +143,7 @@ export default function BookPage() {
       aria-pressed={slot === s}
       className={`rounded-lg px-3 py-2 text-sm font-bold transition-colors ${
         slot === s
-          ? "bg-brand-electricdark text-white"
+          ? "bg-brand-electricdark text-white ring-2 ring-brand-electric/60"
           : "bg-brand-surface text-brand-ink hover:bg-brand-line"
       }`}
     >
@@ -153,13 +153,13 @@ export default function BookPage() {
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-10">
-      <h1 className="text-2xl font-extrabold">Book Appointment</h1>
+      <h1 className="text-2xl font-extrabold tracking-tight">Book Appointment</h1>
       <p className="mt-1 text-sm text-brand-muted">
         Choose the doctor and time slot yourself — booking confirmed instantly,
         with a token number. No calls, no queues.
       </p>
 
-      <form onSubmit={submit} className="mt-6 space-y-6 rounded-2xl border border-brand-line p-5 sm:p-6">
+      <form onSubmit={submit} className="mt-6 space-y-6 rounded-2xl border border-brand-line bg-brand-surface p-5 shadow-xl shadow-black/30 sm:p-6">
         <div>
           <p className="text-sm font-bold">Step 1 — Choose a doctor</p>
           <div className="mt-2 grid gap-2 sm:grid-cols-3">
@@ -170,7 +170,7 @@ export default function BookPage() {
                 onClick={() => setDoctor(d)}
                 aria-pressed={doctor === d}
                 className={`rounded-lg px-3 py-2 text-sm font-bold transition-colors ${
-                  doctor === d ? "bg-brand-electricdark text-white" : "bg-brand-surface text-brand-ink"
+                  doctor === d ? "bg-brand-electricdark text-white ring-2 ring-brand-electric/60" : "bg-brand-surface text-brand-ink"
                 }`}
               >
                 {d === "Other" ? "Other / Not sure" : d}
