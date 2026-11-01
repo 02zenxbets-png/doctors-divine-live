@@ -11,11 +11,11 @@ export const metadata: Metadata = {
     "Doctors Divine Multispeciality Hospital, Navin Nagar, Nawada — surgery, maternity, 24×7 emergency & ICU, in-house lab & pharmacy. Book an appointment online and get a token instantly.",
 };
 
-function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
+function NavLink({ href, children, className = "" }: { href: string; children: React.ReactNode; className?: string }) {
   return (
     <Link
       href={href}
-      className="rounded-lg px-3 py-2 text-sm font-semibold text-brand-muted hover:bg-brand-surface"
+      className={`rounded-lg px-3 py-2 text-sm font-semibold text-brand-muted hover:bg-brand-surface ${className}`}
     >
       {children}
     </Link>
@@ -40,9 +40,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </span>
             </Link>
             <nav className="flex items-center gap-1">
-              <NavLink href="/">Home</NavLink>
+              <NavLink href="/" className="hidden sm:inline-block">Home</NavLink>
               <NavLink href="/book">Book Appointment</NavLink>
-              <NavLink href="/dashboard">Dashboard</NavLink>
               <a
                 href={`tel:${HOSPITAL.phoneHref}`}
                 className="ml-1 hidden items-center gap-1.5 rounded-lg bg-brand-electric px-3 py-2 text-sm font-bold text-white sm:inline-flex"

@@ -92,7 +92,7 @@ export default function BookPage() {
         </p>
         <div className="mx-auto mt-6 max-w-sm rounded-2xl border border-brand-line bg-brand-midnight p-6">
           <p className="text-xs font-bold uppercase tracking-widest text-brand-muted">Your Token Number</p>
-          <p className="tnum mt-1 text-4xl font-extrabold text-brand-electricdark">{done.token}</p>
+          <p className="tnum mt-1 text-4xl font-extrabold text-brand-electric">{done.token}</p>
           <p className="mt-3 text-sm">
             {done.patientName} · {done.doctor}
           </p>
@@ -141,7 +141,7 @@ export default function BookPage() {
       type="button"
       onClick={() => setSlot(s)}
       aria-pressed={slot === s}
-      className={`rounded-lg px-3 py-2 text-sm font-bold ${
+      className={`rounded-lg px-3 py-2 text-sm font-bold transition-colors ${
         slot === s
           ? "bg-brand-electricdark text-white"
           : "bg-brand-surface text-brand-ink hover:bg-brand-line"
@@ -169,7 +169,7 @@ export default function BookPage() {
                 type="button"
                 onClick={() => setDoctor(d)}
                 aria-pressed={doctor === d}
-                className={`rounded-lg px-3 py-2 text-sm font-bold ${
+                className={`rounded-lg px-3 py-2 text-sm font-bold transition-colors ${
                   doctor === d ? "bg-brand-electricdark text-white" : "bg-brand-surface text-brand-ink"
                 }`}
               >
@@ -181,12 +181,14 @@ export default function BookPage() {
 
         <div>
           <p className="text-sm font-bold">Step 2 — Date and time slot</p>
+          <label htmlFor="book-date" className="mt-2 block text-xs font-bold text-brand-muted">Date</label>
           <input
+            id="book-date"
             type="date"
             value={date}
             min={todayISO()}
             onChange={(e) => setDate(e.target.value)}
-            className="mt-2 w-full rounded-lg border border-brand-line px-3 py-2 text-sm"
+            className="mt-1 w-full rounded-lg border border-brand-line px-3 py-2 text-sm focus:border-brand-electric focus:outline-none focus:ring-2 focus:ring-brand-electric/40"
             required
           />
           <p className="mt-4 text-xs font-extrabold uppercase tracking-widest text-brand-muted"><SunIcon className="mr-1 inline h-4 w-4 align-middle" /> Morning OPD</p>
@@ -195,44 +197,64 @@ export default function BookPage() {
           <div className="mt-2 flex flex-wrap gap-2">{EVENING_SLOTS.map(slotBtn)}</div>
         </div>
 
-        <div className="space-y-3">
+        <div className="space-y-4">
           <p className="text-sm font-bold">Step 3 — Patient details</p>
-          <input
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Patient name *"
-            className="w-full rounded-lg border border-brand-line px-3 py-2 text-sm"
-            required
-          />
-          <input
-            value={mobile}
-            onChange={(e) => setMobile(e.target.value)}
-            placeholder="Mobile number * (10-digit)"
-            inputMode="numeric"
-            className="w-full rounded-lg border border-brand-line px-3 py-2 text-sm"
-            required
-          />
-          <div className="grid grid-cols-2 gap-3">
+          <div>
+            <label htmlFor="book-name" className="mb-1 block text-xs font-bold text-brand-muted">Patient name *</label>
             <input
-              value={age}
-              onChange={(e) => setAge(e.target.value)}
-              placeholder="Age"
-              inputMode="numeric"
-              className="rounded-lg border border-brand-line px-3 py-2 text-sm"
-            />
-            <input
-              value={area}
-              onChange={(e) => setArea(e.target.value)}
-              placeholder="Village / Area"
-              className="rounded-lg border border-brand-line px-3 py-2 text-sm"
+              id="book-name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Enter patient name"
+              className="w-full rounded-lg border border-brand-line px-3 py-2 text-sm focus:border-brand-electric focus:outline-none focus:ring-2 focus:ring-brand-electric/40"
+              required
             />
           </div>
-          <input
-            value={problem}
-            onChange={(e) => setProblem(e.target.value)}
-            placeholder="Problem / symptoms"
-            className="w-full rounded-lg border border-brand-line px-3 py-2 text-sm"
-          />
+          <div>
+            <label htmlFor="book-mobile" className="mb-1 block text-xs font-bold text-brand-muted">Mobile number *</label>
+            <input
+              id="book-mobile"
+              value={mobile}
+              onChange={(e) => setMobile(e.target.value)}
+              placeholder="10-digit mobile number"
+              inputMode="numeric"
+              className="w-full rounded-lg border border-brand-line px-3 py-2 text-sm focus:border-brand-electric focus:outline-none focus:ring-2 focus:ring-brand-electric/40"
+              required
+            />
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label htmlFor="book-age" className="mb-1 block text-xs font-bold text-brand-muted">Age</label>
+              <input
+                id="book-age"
+                value={age}
+                onChange={(e) => setAge(e.target.value)}
+                placeholder="e.g. 45"
+                inputMode="numeric"
+                className="w-full rounded-lg border border-brand-line px-3 py-2 text-sm focus:border-brand-electric focus:outline-none focus:ring-2 focus:ring-brand-electric/40"
+              />
+            </div>
+            <div>
+              <label htmlFor="book-area" className="mb-1 block text-xs font-bold text-brand-muted">Village / Area</label>
+              <input
+                id="book-area"
+                value={area}
+                onChange={(e) => setArea(e.target.value)}
+                placeholder="e.g. Hisua"
+                className="w-full rounded-lg border border-brand-line px-3 py-2 text-sm focus:border-brand-electric focus:outline-none focus:ring-2 focus:ring-brand-electric/40"
+              />
+            </div>
+          </div>
+          <div>
+            <label htmlFor="book-problem" className="mb-1 block text-xs font-bold text-brand-muted">Problem / symptoms</label>
+            <input
+              id="book-problem"
+              value={problem}
+              onChange={(e) => setProblem(e.target.value)}
+              placeholder="e.g. Fever, stomach pain"
+              className="w-full rounded-lg border border-brand-line px-3 py-2 text-sm focus:border-brand-electric focus:outline-none focus:ring-2 focus:ring-brand-electric/40"
+            />
+          </div>
         </div>
 
         {error && (

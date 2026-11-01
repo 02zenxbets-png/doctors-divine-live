@@ -26,7 +26,7 @@ import {
 function SectionTitle({ title, sub }: { title: string; sub?: string }) {
   return (
     <div className="mx-auto max-w-2xl text-center">
-      <h2 className="text-2xl font-extrabold text-brand-ink sm:text-3xl">{title}</h2>
+      <h2 className="text-2xl font-extrabold tracking-tight text-brand-ink sm:text-3xl">{title}</h2>
       {sub && <p className="mt-2 text-sm text-brand-muted">{sub}</p>}
     </div>
   );
@@ -71,10 +71,10 @@ export default function HomePage() {
             </a>
           </div>
           <div className="mt-5 flex flex-wrap gap-2 text-xs font-semibold">
-            <span className="rounded-full bg-brand-surface/15 px-3 py-1">✓ 1,000+ surgeries</span>
-            <span className="rounded-full bg-brand-surface/15 px-3 py-1">✓ In-house lab &amp; pharmacy</span>
-            <span className="rounded-full bg-brand-surface/15 px-3 py-1">✓ MD / MS specialists</span>
-            <span className="inline-flex items-center gap-1 rounded-full bg-brand-surface/15 px-3 py-1"><AlertIcon className="h-3.5 w-3.5" /> 24×7 Emergency</span>
+            <span className="rounded-full border border-white/10 bg-black/45 px-3 py-1 backdrop-blur">✓ 1,000+ surgeries</span>
+            <span className="rounded-full border border-white/10 bg-black/45 px-3 py-1 backdrop-blur">✓ In-house lab &amp; pharmacy</span>
+            <span className="rounded-full border border-white/10 bg-black/45 px-3 py-1 backdrop-blur">✓ MD / MS specialists</span>
+            <span className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-black/45 px-3 py-1 backdrop-blur"><AlertIcon className="h-3.5 w-3.5" /> 24×7 Emergency</span>
           </div>
         </div>
       </section>
@@ -88,7 +88,7 @@ export default function HomePage() {
           ["2020", "Serving Nawada since"],
         ].map(([big, small]) => (
           <div key={small} className="rounded-2xl border border-brand-line bg-brand-midnight p-5">
-            <p className="text-2xl font-extrabold text-brand-electricdark">{big}</p>
+            <p className="text-2xl font-extrabold text-brand-electric">{big}</p>
             <p className="mt-1 text-xs font-semibold text-brand-muted">{small}</p>
           </div>
         ))}
@@ -102,7 +102,7 @@ export default function HomePage() {
         />
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {SERVICES.map((s) => (
-            <div key={s.title} className="rounded-2xl border border-brand-line p-5">
+            <div key={s.title} className="rounded-2xl border border-brand-line p-5 transition-shadow hover:border-brand-electric/60 hover:shadow-lg hover:shadow-black/40">
               <ServiceIcon name={s.icon} className="h-8 w-8 text-brand-electricdark" />
               <h3 className="mt-3 font-bold text-brand-ink">{s.title}</h3>
               <p className="mt-1 text-sm text-brand-muted">{s.desc}</p>
@@ -119,7 +119,7 @@ export default function HomePage() {
         />
         <div className="mt-8 grid gap-4 lg:grid-cols-3">
           {CENTRES.map((c) => (
-            <div key={c.title} className="rounded-2xl border border-brand-line bg-brand-midnight p-6">
+            <div key={c.title} className="rounded-2xl border border-brand-line bg-brand-midnight p-6 transition-shadow hover:border-brand-electric/60 hover:shadow-lg hover:shadow-black/40">
               <h3 className="font-bold text-brand-ink">{c.title}</h3>
               <p className="mt-2 text-sm text-brand-muted">{c.desc}</p>
               <ul className="mt-3 space-y-1 text-sm">
@@ -140,9 +140,16 @@ export default function HomePage() {
         />
         <div className="mt-8 grid gap-4 md:grid-cols-2">
           {DOCTORS.map((d) => (
-            <article key={d.name} className="rounded-2xl border border-brand-line p-6">
-              <h3 className="text-lg font-extrabold">{d.name}</h3>
-              <p className="text-sm font-semibold text-brand-electric">{d.title}</p>
+            <article key={d.name} className="rounded-2xl border border-brand-line p-6 transition-shadow hover:border-brand-electric/60 hover:shadow-lg hover:shadow-black/40">
+              <div className="flex items-center gap-3">
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand-electric text-base font-extrabold text-white">
+                  {d.name.replace("Dr. ", "").split(" ").map((w) => w[0]).slice(0, 2).join("")}
+                </span>
+                <div>
+                  <h3 className="text-lg font-extrabold">{d.name}</h3>
+                  <p className="text-sm font-semibold text-brand-electric">{d.title}</p>
+                </div>
+              </div>
               <p className="mt-1 text-xs text-brand-muted">{d.tagline}</p>
               <p className="mt-3 text-sm text-brand-muted">{d.bio}</p>
               <div className="mt-3 flex flex-wrap gap-2">
@@ -180,7 +187,7 @@ export default function HomePage() {
         />
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {LAB_TESTS.map((t) => (
-            <div key={t.name} className="rounded-2xl border border-brand-line p-5">
+            <div key={t.name} className="rounded-2xl border border-brand-line p-5 transition-shadow hover:border-brand-electric/60 hover:shadow-lg hover:shadow-black/40">
               <p className="font-bold text-brand-ink">{t.name}</p>
               <p className="mt-1 text-sm text-brand-muted">{t.desc}</p>
               <p className="mt-2 text-xs font-bold text-brand-electric">{t.report}</p>
@@ -207,7 +214,7 @@ export default function HomePage() {
         />
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {GALLERY.map((g) => (
-            <figure key={g.src} className="overflow-hidden rounded-2xl border border-brand-line">
+            <figure key={g.src} className="overflow-hidden rounded-2xl border border-brand-line transition-shadow hover:border-brand-electric/60 hover:shadow-lg hover:shadow-black/40">
               <div className="relative h-52 w-full">
                 <Image src={g.src} alt={g.caption} fill className="object-cover" />
               </div>
@@ -229,7 +236,7 @@ export default function HomePage() {
         <SectionTitle title="Frequently asked questions" />
         <div className="mt-8 space-y-3">
           {FAQS.map((f) => (
-            <details key={f.q} className="rounded-2xl border border-brand-line p-5">
+            <details key={f.q} className="rounded-2xl border border-brand-line p-5 transition-shadow hover:border-brand-electric/60">
               <summary className="cursor-pointer font-bold">{f.q}</summary>
               <p className="mt-2 text-sm text-brand-muted">{f.a}</p>
             </details>

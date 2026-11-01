@@ -5,11 +5,11 @@
 @layer components {
   /* One shared primary button — Book Appointment and form submits. */
   .btn-primary {
-    @apply rounded-xl bg-brand-electric px-5 py-3 text-sm font-bold text-white shadow hover:bg-brand-electricdark disabled:opacity-60;
+    @apply rounded-xl bg-brand-electric px-5 py-3 text-sm font-bold text-white shadow transition-colors hover:bg-brand-electricdark disabled:opacity-60;
   }
   /* One shared secondary button — call / WhatsApp / outline actions. */
   .btn-secondary {
-    @apply rounded-xl border border-brand-line bg-brand-surface px-5 py-3 text-sm font-bold text-brand-ink hover:bg-brand-line;
+    @apply rounded-xl border border-brand-line bg-brand-surface px-5 py-3 text-sm font-bold text-brand-ink transition-colors hover:bg-brand-line;
   }
 }
 
