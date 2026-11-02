@@ -19,6 +19,12 @@ export type EmailTarget = {
  * returns { sent: false, reason: "off" } — the caller must record email
  * status as "off", never as "sent". Failures are returned, never thrown, so
  * a failed email can never break the booking itself.
+ *
+ * Every recipient is attempted, even if an earlier one fails: with an
+ * unverified Resend account, one blocked address (e.g. a doctor's address
+ * before the hospital's domain is verified) must never stop mail to the
+ * other addresses. Failures are listed per address in `reason`, with a
+ * note of which addresses still received the mail.
  */
 export async function sendBookingEmails(
   booking: EmailTarget,
@@ -46,20 +52,31 @@ export async function sendBookingEmails(
   ]
     .filter((l) => l !== null)
     .join("\n");
-  try {
-    for (const to of recipients) {
+  const failures: string[] = [];
+  const succeeded: string[] = [];
+  for (const to of recipients) {
+    try {
       const { error } = await resend.emails.send({ from, to, subject, text });
       if (error) {
-        return { sent: false, reason: error.message || "Resend rejected the send" };
+        failures.push(`${to}: ${error.message || "Resend rejected the send"}`);
+      } else {
+        succeeded.push(to);
       }
+    } catch (err) {
+      failures.push(
+        `${to}: ${err instanceof Error ? err.message : "Email send failed"}`
+      );
     }
-    return { sent: true };
-  } catch (err) {
-    return {
-      sent: false,
-      reason: err instanceof Error ? err.message : "Email send failed",
-    };
   }
+  if (failures.length === 0) return { sent: true };
+  const detail = failures.join("; ");
+  return {
+    sent: false,
+    reason:
+      succeeded.length > 0
+        ? `${detail} (sent OK: ${succeeded.join(", ")})`
+        : detail,
+  };
 }
 
 /** Read the 3 recipient addresses from the settings table (may be empty). */
