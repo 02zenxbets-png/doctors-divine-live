@@ -1,168 +1,171 @@
-# Doctors Divine — Live Booking + Dashboard Website
+# Doctors Divine — Hospital Website with Live Appointment Booking
 
-Doctors Divine Multispeciality Hospital, Nawada (Bihar) ki asli, live website:
-ek hi web me **3 pages** — hospital showcase (Home), online appointment booking
-(Book Appointment) aur password-locked doctor dashboard (Dashboard).
+The official website of **Doctors Divine Multispeciality Hospital, Nawada (Bihar)** — a single Next.js app that combines a hospital showcase, online appointment booking with an instant token number, a password-protected doctor dashboard, and an appointment reminder system.
 
-- **Home** — hospital ki jaankari: asli photos (building, team, surgery),
-  doctors, 8 services, 3 specialist centres, lab tests, gallery, FAQs,
-  timings aur address.
-- **Book Appointment** — patient doctor, date aur time slot chunta hai, form
-  bharta hai, booking database me save hoti hai aur **token number**
-  (jaise `DD-7860`) turant milta hai.
-- **Dashboard** — sirf doctor ke liye. Admin password se khulta hai. Bookings
-  ki list (Today/All), counts (Today/Upcoming/Pending/Total), search + status
-  filter, Confirm / Mark done / Cancel / Delete, har 5 second me auto-refresh,
-  aur 3 email addresses par booking alerts.
-
-**Isme kya NAHI hai (saaf-saaf):** online payment nahi hai, SMS alert nahi
-hai, aur patient ka data kisi aur ko nahi dikhta — dashboard sirf password se
-khulta hai.
+- **Live website:** https://doctors-divine-live.vercel.app
+- **GitHub repository:** https://github.com/02zenxbets-png/doctors-divine-live (private)
+- **Stack:** Next.js 14 · React 18 · TypeScript · Tailwind CSS · Supabase (PostgreSQL) · Resend · Vercel
 
 ---
 
-## 1. Pehle samajh lein — kya-kya chahiye
+## What this website does
 
-| Cheez | Kahan se | Paisa |
+### 1. Home — the hospital showcase
+
+Everything a patient needs before visiting: the hospital's real photos (building, team, surgery), both doctors and their specialities, 8 services, 3 specialist centres, lab tests with report times, a photo gallery, FAQs, OPD timings and the address. The hospital runs 24×7 for emergency and ICU care.
+
+### 2. Book Appointment — online booking with an instant token
+
+A patient chooses a doctor, a date and a time slot, fills in a short form (name, 10-digit mobile, age, area, problem), and the booking is saved to the database. A **token number** (for example `DD-7860`) is shown immediately — the patient shows this token at reception when they visit. No account, no login and no payment is needed to book.
+
+### 3. Dashboard — for the doctor only
+
+The dashboard is locked behind an admin password. Once unlocked it shows:
+
+- **Live counts** — Today, Upcoming, Pending and Total bookings
+- **Live list** — bookings for today or all bookings, auto-refreshed every 5 seconds
+- **Search and filters** — search by name, mobile or token; filter by status
+- **Actions on every booking** — Confirm, Mark done, Cancel, Delete
+- **New-booking alerts** — a banner and a NEW badge appear the moment a booking arrives while the dashboard is open
+- **Email alerts** — every new booking is emailed to up to 3 addresses (optional, via Resend)
+
+### 4. Appointment reminders — built into the dashboard
+
+Patients used to receive no confirmation or reminder at all — email alerts went only to the hospital. The Reminders section fixes that. It sorts bookings into five ready-to-send lists, using the Indian Standard Time date:
+
+| List | When to send | Message |
 |---|---|---|
-| Supabase project (database) | https://supabase.com | Free tier — card nahi chahiye |
-| Vercel account (website hosting) | https://vercel.com | Free tier — card nahi chahiye |
-| Resend account (email alerts, optional) | https://resend.com | Free tier — card nahi chahiye |
-| GitHub account (code rakhne ke liye, Vercel ke liye zaroori) | https://github.com | Free |
+| **New — confirm now** | Right after booking | Booking confirmation with token, doctor, date and time |
+| **Today** | On the morning of the appointment | Same-day reminder |
+| **Tomorrow** | The evening before | Day-before reminder |
+| **No-show** | The day after a missed appointment | Reschedule message |
+| **Follow-up** | The day after a completed visit | Recovery check-in message |
 
-Poora system free tier par chalta hai. Free tier ki limits neeche “Free-tier
-limits” me likhi hain.
+For every patient the dashboard shows the ready-written message and three actions: **Copy message**, **Open WhatsApp** (opens a chat with the patient on their saved mobile number) and **Mark sent**, so the same reminder is never sent twice. "Mark sent" is stored in that browser only.
 
----
-
-## 2. Step 1 — NAYA Supabase project banayein (database)
-
-> ⚠️ **Zaroori:** Hamesha **NAYA** project banayein. Kisi purane ya paused
-> project ko haath mat lagayein — chahe wo aapka hi kyun na ho. Purana project
-> kisi aur app ka ho sakta hai, aur usme ye tables daalne se wo app kharab ho
-> sakta hai.
-
-1. https://supabase.com kholein, sign in karein, **New project** dabayein.
-2. Project ka naam dein, jaise `doctors-divine`. Database password apne paas
-   safe jagah likh lein. Region apne sabse paas wala chunein (jaise
-   `Mumbai / ap-south-1` dikhe to wahi).
-3. Project banne ka wait karein (1–2 minute).
-4. Left menu me **SQL Editor** kholein → **New query** → is repo ki file
-   `supabase/schema.sql` ka **poora content** copy karke paste karein →
-   **Run** dabayein.
-   - Success aana chahiye. Isse 2 tables banengi: `bookings` (khali — koi
-     sample booking nahi) aur `settings` (khali email row).
-5. Ab keys copy karein: left menu me **Project Settings** (⚙️) → **API**:
-   - **Project URL** — jaise `https://abcdefgh.supabase.co`
-   - **service_role key** — lambi secret key, jo `eyJ...` se shuru hoti hai.
-     ⚠️ Ye key **secret** hai. Ise kabhi browser me, kisi chat me, ya kisi
-     public jagah paste mat karein. Sirf Vercel ke env var me daalni hai.
+Sending is **manual by design**: automated WhatsApp sending needs WhatsApp Business API approval and costs money, and bulk auto-sending risks getting the number banned — so the staff stays in control of every message. The reminders need no database change and no new credentials: they read the existing `bookings` table, where the mobile number is already saved.
 
 ---
 
-## 3. Step 2 — Admin password ka hash banayein
+## What this website does NOT do
 
-Dashboard ka password seedha kabhi kisi file ya env var me **nahi** likha
-jata. Uske badle uska **bcrypt hash** banaya jata hai.
+Being honest about the limits, so nobody is surprised later:
 
-1. Is code ko apne computer par kholein aur terminal me ye chalyein:
-   ```bash
-   npm install
-   npm run hash-password -- "ApnaMazbootPassword123"
-   ```
-   (Password apna rakhein, kam se kam 8 characters, aur aisa jo koi guess na
-   kar sake.)
-2. Terminal ek lambi line print karega jo `$2b$12$...` se shuru hoti hai.
-   **Wahi hash** copy karein — password nahi.
-3. Password ko safe jagah likh kar rakhein (diary/password manager).
-
-> ⚠️ **Password recovery NAHI hai.** Password bhool gaye to dashboard se
-> bookings nahi khulengi. Ek hi rasta hai: naya password lekar naya hash
-> banayein, Vercel me `ADMIN_PASSWORD_HASH` update karein, redeploy karein
-> (neeche “Admin password badalna ya bhool jana” dekhein).
+- **No online payment.** Booking is free and payment (if any) happens at the hospital.
+- **No SMS alerts to patients.** Reminders go through WhatsApp, sent manually from the dashboard (see above).
+- **No real-time slot blocking.** Two patients can pick the same slot; bookings arrive as Pending and the staff confirms them from the dashboard.
+- **No patient accounts.** There is no login for patients and no medical history stored here — only the booking itself.
 
 ---
 
-## 4. Step 3 — Vercel par deploy karein (website live)
+## How it works
 
-1. Is poore `doctors-divine-live` folder ko GitHub par ek **naye private
-   repository** me daal dein (GitHub Desktop ya `git push` se — repo private
-   rakhna hi kaafi hai, kyunki `.env` files git me nahi jayengi; `.gitignore`
-   me wo pehle se blocked hain).
-2. https://vercel.com kholein, sign in karein, **Add New → Project** →
-   apna GitHub repo chunein → **Import**.
-3. **Environment Variables** section me ye 5 values daalein (pehle wale steps
-   se copy karke):
+```
+Patient (browser)
+  → /book form → POST /api/bookings
+  → validates name, mobile, doctor, date, slot
+  → saves the booking in Supabase (status: pending)
+  → best-effort email alert to the hospital (a failed email never fails the booking)
+  → returns the token number to the patient
 
-   | Variable | Value kahan se |
-   |---|---|
-   | `NEXT_PUBLIC_SUPABASE_URL` | Supabase → Project Settings → API → Project URL |
-   | `SUPABASE_SERVICE_ROLE_KEY` | Supabase → Project Settings → API → service_role key |
-   | `ADMIN_PASSWORD_HASH` | Step 2 me bana hash (`$2b$12$...`) |
-   | `ADMIN_SESSION_SECRET` | Koi lambi random line (password generator se) — optional, par daalna achha hai |
-   | `RESEND_API_KEY` | Abhi khali chhod dein (email baad me Step 5 se on karna) |
+Doctor (browser)
+  → /dashboard → enters the admin password once
+  → signed session cookie, valid for 12 hours
+  → GET /api/admin/bookings (auto-refresh every 5 seconds)
+  → Confirm / Mark done / Cancel / Delete, retry a failed email
+  → GET /api/admin/reminders for the five reminder lists
+```
 
-4. **Deploy** dabayein. 1–2 minute me Vercel aapko ek public link dega,
-   jaise `https://doctors-divine.vercel.app`. **Bas — website live hai.**
-   - Home page: `https://.../`
-   - Book Appointment: `https://.../book`
-   - Dashboard: `https://.../dashboard`
+**Security, by design:**
 
-> Agar baad me code me kuch badlein aur GitHub par push karein, Vercel apne
-> aap dobara deploy kar dega.
+- Row Level Security is **enabled** on both tables (`bookings`, `settings`) with **no policies** for the browser roles — nobody can read or write the database from the browser, even with the public anon key.
+- The app only touches the database from the server (Next.js API routes) using the **service-role key**, which is kept server-only and never starts with `NEXT_PUBLIC_`.
+- The admin password is never stored as plain text — only its **bcrypt hash** is stored as an environment variable, and there is **no password recovery**. If the password is forgotten, a new hash must be generated and deployed (see "Changing the admin password" below).
+- The dashboard session is a signed cookie that expires after 12 hours, and **Lock now** ends it immediately.
 
 ---
 
-## 5. Step 4 — Doctor dashboard kaise kholega
+## Getting started
 
-1. Browser me `https://.../dashboard` kholein.
-2. Pehli baar page bolega ki password set hai — **admin password** daalein
-   (wahi password jiska hash Step 2 me banaya tha) → **Unlock bookings**.
-3. Andar: upar LIVE bar (har 5 second me auto-refresh), counts, Today/All
-   toggle, search aur status filter, aur har booking par Confirm / Mark done /
-   Cancel / Delete buttons.
-4. Kaam khatam ho to **Lock now** dabayein — dashboard turant lock ho jayega.
-   Session waise bhi 12 ghante me apne aap khatam ho jata hai.
-5. Nayi booking aate hi dashboard khula ho to green banner aayega —
-   “New booking just arrived” — aur us booking par **NEW** badge lagega.
+You need four free accounts: [Supabase](https://supabase.com) (database), [Vercel](https://vercel.com) (hosting), [GitHub](https://github.com) (code, required by Vercel) and, optionally, [Resend](https://resend.com) (email alerts). No credit card is needed for any of them. The whole system runs on their free tiers.
 
----
+### Step 1 — Create a NEW Supabase project (the database)
 
-## 6. Step 5 — Email alerts on karein (optional, Resend se)
+> ⚠️ **Always create a NEW project.** Never reuse an old or paused project — even your own. It may belong to another app, and adding these tables to it could break that app.
 
-Jab tak ye step na karein, email alerts **OFF** rahenge — bookings phir bhi
-save hongi, dashboard me “Email off” dikhega. Ye normal hai, koi error nahi.
+1. Open https://supabase.com, sign in, and click **New project**.
+2. Give it a name, for example `doctors-divine`. Write the database password down somewhere safe. Pick the region closest to you (for example `Mumbai / ap-south-1` if shown).
+3. Wait 1–2 minutes for the project to be created.
+4. In the left menu open **SQL Editor** → **New query** → copy the **entire contents** of `supabase/schema.sql` from this repository, paste it, and click **Run**. On success it creates two tables: `bookings` (empty — no sample bookings) and `settings` (one empty email row).
+5. Now copy the keys: left menu → **Project Settings** (⚙️) → **API**:
+   - **Project URL** — for example `https://abcdefgh.supabase.co`
+   - **service_role key** — a long secret key starting with `eyJ...`. ⚠️ This key is **secret**. Never paste it in a browser, a chat or a public place. It goes only into a Vercel environment variable.
 
-1. https://resend.com par free account banayein.
-2. **API Keys** → **Create API Key** → key copy karein.
-3. Vercel me project kholein → **Settings → Environment Variables** →
-   `RESEND_API_KEY` me key daalein (aur `RESEND_FROM` default rehne dein) →
-   **Redeploy** karein (Deployments → latest → ⋯ → Redeploy).
-4. Dashboard kholein → neeche **Booking email alerts** me 3 email addresses
-   daal kar **Save emails** dabayein.
-5. Ab har nayi booking ki details teeno addresses par email se jayegi. Har
-   booking par email ka status dikhega: `off / sending / sent / failed`.
-   Failed ho to **Retry email** button se dobara bhej sakte hain.
+### Step 2 — Create the admin password hash
 
-> **Resend free tier ki ek limit jaan lein:** jab tak aap apna domain verify
-> nahi karte, Resend sirf usi email par bhejta hai jo Resend account ka
-> owner hai. Isliye agar 3 alag addresses par alert chahiye to Resend me apna
-> domain verify karna hoga (Resend dashboard → Domains → apna domain add
-> karein aur DNS records lagayein), phir `RESEND_FROM` ko apne domain wale
-> address par badlein, jaise `Doctors Divine <alerts@doctorsdivine.com>`.
-> Domain verify kiye bina 3 alag addresses par mail jaana guarantee nahi hai.
-
----
-
-## 7. Local me chalana (test karne ke liye, zaroori nahi)
+The dashboard password is never written in a file or an environment variable. Instead, a **bcrypt hash** of it is stored.
 
 ```bash
 npm install
-cp .env.example .env.local   # phir .env.local me asli values bharein
-npm run dev                  # http://localhost:3000 kholein
+npm run hash-password -- "YourStrongPassword123"
 ```
 
-Production build check karne ke liye:
+Use your own password — at least 8 characters, and not something anyone could guess. The terminal prints a long line starting with `$2b$12$...`. **Copy that hash** — not the password. Write the password down somewhere safe (a diary or a password manager).
+
+> ⚠️ **There is no password recovery.** If the password is forgotten, the dashboard cannot be opened. The only fix is to create a new password and hash, update `ADMIN_PASSWORD_HASH` in Vercel, and redeploy (see "Changing the admin password" below).
+
+### Step 3 — Deploy on Vercel (go live)
+
+1. Push this folder to a **new private repository** on GitHub (GitHub Desktop or `git push`). Keeping the repo private is enough — `.env` files are already blocked by `.gitignore`, so secrets never reach Git.
+2. Open https://vercel.com, sign in, click **Add New → Project**, select the GitHub repository, and click **Import**.
+3. In the **Environment Variables** section, add these values (copied from the steps above):
+
+   | Variable | Where the value comes from |
+   |---|---|
+   | `NEXT_PUBLIC_SUPABASE_URL` | Supabase → Project Settings → API → Project URL |
+   | `SUPABASE_SERVICE_ROLE_KEY` | Supabase → Project Settings → API → service_role key |
+   | `ADMIN_PASSWORD_HASH` | The hash created in Step 2 (`$2b$12$...`) |
+   | `ADMIN_SESSION_SECRET` | Any long random string (from a password generator) — optional, but recommended |
+   | `RESEND_API_KEY` | Leave empty for now (email is switched on in Step 5) |
+
+4. Click **Deploy**. In 1–2 minutes Vercel gives you a public link, for example `https://doctors-divine.vercel.app`. **That is it — the website is live.**
+   - Home: `https://.../`
+   - Book Appointment: `https://.../book`
+   - Dashboard: `https://.../dashboard`
+
+If you later change the code and push to GitHub, Vercel redeploys automatically.
+
+### Step 4 — How the doctor opens the dashboard
+
+1. Open `https://.../dashboard` in a browser.
+2. Enter the **admin password** (the one whose hash was created in Step 2) and click **Unlock bookings**.
+3. Inside you will see the LIVE bar (auto-refresh every 5 seconds), the counts, the Today/All toggle, search and status filter, and Confirm / Mark done / Cancel / Delete on every booking — plus the Reminders section below the counts.
+4. When finished, click **Lock now** — the dashboard locks immediately. The session also expires on its own after 12 hours.
+5. If a new booking arrives while the dashboard is open, a green banner appears — "New booking just arrived" — and that booking carries a **NEW** badge.
+
+### Step 5 — Switch on email alerts (optional, via Resend)
+
+Until this step is done, email alerts stay **OFF** — bookings still save normally, and the dashboard simply shows "Email off". That is normal, not an error.
+
+1. Create a free account at https://resend.com.
+2. Go to **API Keys** → **Create API Key** and copy the key.
+3. In Vercel, open the project → **Settings → Environment Variables** → put the key in `RESEND_API_KEY` (leave `RESEND_FROM` at its default) → **Redeploy** (Deployments → latest → ⋯ → Redeploy).
+4. Open the dashboard → scroll to **Booking email alerts** → enter up to 3 email addresses and click **Save emails**.
+5. From now on, every new booking is emailed to all three addresses. Each booking shows its email status: `off / sending / sent / failed`. If an email fails, the **Retry email** button sends it again.
+
+> **One Resend free-tier limit to know:** until you verify your own domain, Resend only sends to the email address that owns the Resend account. So if alerts must reach 3 different addresses, verify your domain in Resend (Dashboard → Domains → add your domain and set the DNS records), then change `RESEND_FROM` to an address on your domain, for example `Doctors Divine <alerts@doctorsdivine.com>`. Without a verified domain, delivery to 3 different addresses is not guaranteed.
+
+---
+
+## Running locally (for testing — not required)
+
+```bash
+npm install
+cp .env.example .env.local   # then fill in the real values in .env.local
+npm run dev                  # open http://localhost:3000
+```
+
+To check the production build:
 
 ```bash
 npm run build
@@ -171,63 +174,51 @@ npm start
 
 ---
 
-## 8. Environment variables — poori list
+## Environment variables — full list
 
-| Variable | Zaroori? | Kaam |
+| Variable | Required? | What it does |
 |---|---|---|
-| `NEXT_PUBLIC_SUPABASE_URL` | Haan | Supabase project ka URL |
-| `SUPABASE_SERVICE_ROLE_KEY` | Haan | Server se database access (secret, kabhi browser me nahi) |
-| `ADMIN_PASSWORD_HASH` | Haan | Dashboard password ka bcrypt hash (password kabhi nahi) |
-| `ADMIN_SESSION_SECRET` | Nahi (recommended) | Dashboard session cookie sign karne ka secret |
-| `RESEND_API_KEY` | Nahi | Email alerts ke liye; khali = alerts OFF |
-| `RESEND_FROM` | Nahi | Alert emails ka sender address (default: Resend onboarding address) |
+| `NEXT_PUBLIC_SUPABASE_URL` | Yes | The Supabase project URL |
+| `SUPABASE_SERVICE_ROLE_KEY` | Yes | Server-side database access (secret — never in the browser) |
+| `ADMIN_PASSWORD_HASH` | Yes | The bcrypt hash of the dashboard password (never the password itself) |
+| `ADMIN_SESSION_SECRET` | No (recommended) | Secret used to sign the dashboard session cookie |
+| `RESEND_API_KEY` | No | Email alerts; empty means alerts are OFF |
+| `RESEND_FROM` | No | Sender address on alert emails (default: Resend's onboarding address) |
 
-`.env.example` me sirf placeholder values hain — asli keys kabhi kisi file
-me mat daalein, sirf `.env.local` (local) ya Vercel ke env vars (live) me.
-
----
-
-## 9. Free-tier limits (imaandari se)
-
-- **Supabase free tier:** 500 MB database, 50,000 monthly active users tak
-  theek hai; project 7 din inactive rahe to **pause** ho sakta hai — Supabase
-  dashboard se Resume karna padta hai (ek click). Is hospital ke booking
-  volume ke liye ye kaafi hai.
-- **Vercel free tier:** personal projects ke liye free; bandwidth aur build
-  minutes ki limit hoti hai, par ek hospital website ke liye kaafi hai.
-- **Resend free tier:** 100 emails/day, 3,000/month. Har booking par 3 emails
-  jati hain, to roz ~33 bookings tak free me chal jayega.
+`.env.example` contains placeholder values only — never put real keys or passwords in a file. Use `.env.local` locally and Vercel's environment variables for the live site.
 
 ---
 
-## 10. Admin password badalna ya bhool jana
+## Free-tier limits (stated honestly)
 
-1. Naya password soch lein.
-2. `npm run hash-password -- "NayaPassword123"` se naya hash banayein.
-3. Vercel → Settings → Environment Variables → `ADMIN_PASSWORD_HASH` ki
-   value badal dein → Redeploy karein.
-4. Purane sessions apne aap khatam ho jayenge; naya password se login karein.
+- **Supabase free tier:** 500 MB database — plenty for this hospital's booking volume. A project left inactive for 7 days may be **paused**; resume it with one click from the Supabase dashboard.
+- **Vercel free tier:** free for personal projects, with limits on bandwidth and build minutes — more than enough for a hospital website.
+- **Resend free tier:** 100 emails/day, 3,000/month. Each booking sends 3 emails, so roughly 33 bookings a day fit in the free tier.
 
 ---
 
-## 11. Photo honesty note
+## Changing the admin password (or if it is forgotten)
 
-Home page ki gallery me team, building aur surgery ki photos hospital ki
-**asli** photos hain (doctorsdivine.com se). Baaki facility photos
-(OT, ICU, maternity, pharmacy) **illustrative** hain — suvidha samjhane ke
-liye — aur gallery me un par “illustrative” label laga hai. Official use se
-pehle hospital ki permission le lena achha rahega, kyunki asli photos unhi
-ki hain.
+1. Choose a new password.
+2. Create a new hash: `npm run hash-password -- "YourNewPassword123"`.
+3. In Vercel → Settings → Environment Variables, replace the value of `ADMIN_PASSWORD_HASH` → Redeploy.
+4. Old sessions end automatically; sign in with the new password.
 
 ---
 
-## 12. Project structure
+## Photo honesty note
+
+The team, building and surgery photos on the home page are the hospital's **real** photos (from doctorsdivine.com). The other facility photos (operation theatre, ICU, maternity, pharmacy) are **illustrative** — they explain a facility, not a real room — and the gallery labels them as "illustrative". Get the hospital's permission before using its real photos in official material, because those photos belong to the hospital.
+
+---
+
+## Project structure
 
 ```
 app/
   page.tsx            Home (showcase)
   book/page.tsx       Book Appointment form
-  dashboard/page.tsx  Password-locked dashboard (live polling)
+  dashboard/page.tsx  Password-locked dashboard (live polling + reminders)
   api/
     bookings/route.ts        Public booking create (+ email attempt)
     admin/
@@ -238,13 +229,15 @@ app/
       bookings/[id]/route.ts Status change / delete (admin only)
       settings/route.ts      3 alert emails (admin only)
       retry-email/route.ts   Re-send booking email (admin only)
+      reminders/route.ts     Reminder lists (admin only)
 lib/
-  data.ts      Hospital content (doctors, services, lab, FAQs, gallery)
-  supabase.ts  Server-only Supabase client (service-role key)
-  auth.ts      Bcrypt check + signed session cookie
-  email.ts     Resend send + recipients read
-  admin.ts     Admin-session guard for API routes
-supabase/schema.sql   Tables + RLS (run once in a NEW project)
-scripts/generate-hash.mjs   Admin password hash generator
-public/images/        Hospital photos (real ones + labeled illustrative ones)
+  reminders.ts   Reminder messages + wa.me links + IST dates
+  data.ts        Hospital content (doctors, services, lab, FAQs, gallery)
+  supabase.ts    Server-only Supabase client (service-role key)
+  auth.ts        Bcrypt check + signed session cookie
+  email.ts       Resend send + recipients read
+  admin.ts       Admin-session guard for API routes
+supabase/schema.sql           Tables + RLS (run once in a NEW project)
+scripts/generate-hash.mjs     Admin password hash generator
+public/images/                Hospital photos (real ones + labeled illustrative ones)
 ```
